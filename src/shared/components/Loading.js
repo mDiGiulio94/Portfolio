@@ -12,9 +12,9 @@ export default function Loading(){
 const SpinnerCustom = styled.div`
 width: 45px;
 aspect-ratio: 1/1;
-border: 5px solid #34495e;
+border: 5px solid #fff;
 border-radius: 50%;
-border-color: #34495e transparent #34495e transparent;
+border-color: #fff transparent #fff transparent;
 animation: spin 0.7s linear infinite;
 
 @keyframes spin{

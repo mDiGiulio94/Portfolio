@@ -1,0 +1,17 @@
+{
+   "welcome": [
+    {
+        "benvenuto": "Benvenuto!",
+        "nome": "Sono Marco Di Giulio",
+        "specializzazione": "Sviluppatore Frontend",
+        "descrizione": "Creo esperienze web coinvolgenti e interattive utilizzando tecnologie moderne come React, Angular e Vue"
+    }
+   ],
+   "presentazione": [
+    {
+        "infoPersonali": "Lavoro all’incrocio tra design e sviluppo, definendo pattern chiari e scalabili.\nProgetto componenti accessibili, reattivi e coerenti con lo stile del brand.\nOttimizzo rendering e bundle per massimizzare velocità e percezione di qualità.\nCollaboro con designer e stakeholder per allineare obiettivi e risultati.\nObiettivo: interfacce veloci, consistenti e davvero facili da usare.",
+        "occupazionePresente": "Al momento lavoro come sviluppatore Front End presso JDK.srl, una società di consulenze a Roma (IT) con il compito di sviluppare e mantenere interfacce utente moderne e responsive, rispettanto i design generati su Figma, gli standard per l'accessibilità web e le best practice per consegnare un prodotto finale di alto livello e performante.",
+        "spareTime": "Nel tempo libero, mi piace esplorare, che siano nuove tencnologie, paesaggi, culture o sapori non importa, qualsiasi cosa nuova vale la pena di essere esplorata, ne traggo ispirazione per il futuro e viene reso più speciale con la presenza della mia compagna, adoro ascoltare musica e allenarmi, per mantenere un benessere sia mentale che fisico."
+    }
+   ]
+}

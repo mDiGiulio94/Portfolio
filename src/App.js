@@ -13,7 +13,11 @@ const Home = lazy(() => import("./pages/Home.js"));
 function App() {
   return (
     <Router>
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={
+        <div className="loading-container">
+    <Loading />
+        </div>
+    }>
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
