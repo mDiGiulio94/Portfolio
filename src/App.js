@@ -5,10 +5,11 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import Loading from "./shared/components/Loading";
-import ScrollTop from "./shared/components/ScrollTop";
+import Loading from "./feature/Loading.js";
+import ScrollTop from "./feature/ScrollTop.js";
 
 const Home = lazy(() => import("./pages/Home.js"));
+const AllJobs = lazy(() => import("./pages/AllJobs.js"));
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
     }>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<AllJobs />} />
         </Routes>
       </Suspense>
       
