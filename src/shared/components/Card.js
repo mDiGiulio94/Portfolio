@@ -12,9 +12,17 @@ export default function Card({
   duration,
   description,
   tecnologies,
+  onMouseEnter,
+  onMouseLeave,
+  isDimmed,
 }) {
   return (
-    <CardContainer onClick={onClick}>
+    <CardContainer
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      className={isDimmed ? "dimmed" : ""}
+    >
       <section>
         <div>
           {name}
@@ -46,6 +54,10 @@ const CardContainer = styled.div`
   height: fit-content;
   justify-content: center;
   opacity: 1;
+
+   &.dimmed {
+    opacity: 0.3;
+  }
 
   &:hover {
     background: #1e293b;
@@ -80,12 +92,7 @@ const CardContainer = styled.div`
         background: #a7f3d038;
         box-shadow: inset 0 0 0 0 #a7f3d0;
         color: #5eead4;
-     
       }
-
-     
-
-      
     }
   }
 `;

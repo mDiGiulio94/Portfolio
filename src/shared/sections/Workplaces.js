@@ -1,8 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import Card from "../components/Card";
 
 export default function Workplaces() {
+
+    const [hoverCard, setHoverCard] = useState(null);
+
   const items = [
     {
       id: 1,
@@ -40,7 +43,11 @@ export default function Workplaces() {
         duration={i.durata}
         description={i.descrizione}
         tecnologies={i.tecnologie}
-        items={items} />
+        items={items} 
+        isDimmed={hoverCard !== null && hoverCard !== idx}
+        onMouseEnter={() => setHoverCard(idx)}
+        onMouseLeave={() => setHoverCard(null)}
+        />
       ))}
     </Container>
   );
