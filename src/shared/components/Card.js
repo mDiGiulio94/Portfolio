@@ -45,6 +45,7 @@ const CardContainer = styled.div`
   max-height: 250px;
   height: fit-content;
   justify-content: center;
+  opacity: 1;
 
   &:hover {
     background: #1e293b;
@@ -79,7 +80,12 @@ const CardContainer = styled.div`
         background: #a7f3d038;
         box-shadow: inset 0 0 0 0 #a7f3d0;
         color: #5eead4;
+     
       }
+
+     
+
+      
     }
   }
 `;
