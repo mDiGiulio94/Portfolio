@@ -25,6 +25,7 @@ const Container = styled.div`
   .presentation-section {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
+    padding: 10px;
   }
 `;

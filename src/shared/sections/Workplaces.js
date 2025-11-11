@@ -12,7 +12,7 @@ export default function Workplaces() {
       nome: "Azienda 1",
       ruolo: "Ruolo 1",
       durata: "2 anni",
-      descrizione: "Compiti del lavoro",
+      descrizione:"Compiti del lavoro Compiti del lavoro Compiti del lavoro Compiti del lavoro Compiti del lavoro Compiti del lavoro Compiti del lavoro Compiti del lavoro Compiti del lavoro Compiti del lavoro Compiti del lavoro " ,
       tecnologie: ["React", "Node.js", "Firebase"],
     },
     {

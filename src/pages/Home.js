@@ -8,15 +8,15 @@ import useMediaQuery from "../shared/hooks/hooks.js";
 
 export default function Home() {
 
-    const isSmall = useMediaQuery()
+    const isSmall = useMediaQuery("(max-width: 600px)")
 
   return (
-    <Container>
-      <ContainerLeft>
+    <Container $small={isSmall}>
+      <ContainerLeft $small={isSmall}>
         <Welcome />
       </ContainerLeft>
 
-      <ContainerRight>
+      <ContainerRight $small={isSmall}>
         <Presentazione />
         <Workplaces />
         <Projects />
@@ -27,6 +27,7 @@ export default function Home() {
 
 const Container = styled.div`
   display: flex;
+  flex-direction: ${props => props.$small ? "column" : "row"};
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
@@ -35,6 +36,7 @@ const Container = styled.div`
   padding-top: 6rem;
   padding-bottom: 6rem;
   gap: 16px;
+  align-items: flex-start;
 
 ::-webkit-scrollbar {
   display: none;
@@ -47,15 +49,14 @@ const Container = styled.div`
 `;
 
 const ContainerLeft = styled.div`
-  width: 50%;
+  width: ${props => props.$small ? "100%" : "50%"};
   top: 0;
-  position: sticky;
+  position: ${props => props.$small ? "" : "sticky"};
 `;
 
 const ContainerRight = styled.div`
   display: flex;
   flex-direction: column;
   gap: 50px;
-  width: 50%;
-  overflow-y: auto;
+  width: ${props => props.$small ? "100%" : "50%"};
 `;

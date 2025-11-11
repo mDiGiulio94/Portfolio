@@ -6,6 +6,7 @@
   font-weight: 900;
 }
 
+/* variabili corrispondenti ai font di tutto il progetto e al loro ridimensionamento quando lo schermo cambia */
 :root{
   /* base */
   --fs-body: clamp(16px, 0.30vw + 15px, 18px);
@@ -28,6 +29,7 @@ h3 { font-size: var(--fs-h3); line-height: var(--lh-h); }
 h4 { font-size: var(--fs-h4); line-height: var(--lh-h); }
 h5 { font-size: var(--fs-h5); line-height: var(--lh-h); }
 h6 { font-size: var(--fs-h6); line-height: var(--lh-h); }
+p { font-size: var(--fs-h6); line-height: var(--lh-h); }
 .small, small { font-size: clamp(14px, 0.2vw + 13px, 16px); line-height: 1.5; }
 
 body {

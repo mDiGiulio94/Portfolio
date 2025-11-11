@@ -24,19 +24,26 @@ export default function Card({
       className={isDimmed ? "dimmed" : ""}
     >
       <section>
-        <div>
-          {name ?? ""}
-          {role ?? ""}
-          {duration ?? ""}
-          {description ?? ""}
+        <div className="info-box">
+          <span>
+            <h5>{duration ?? ""}</h5>
+          </span>
+          <span>
+            <h5>
+              {name ?? ""}
+              {role ? " - " : ""}
+              {role ?? ""}
+            </h5>
+            <p> {description ?? ""}</p>
+            {tecnologies && (
+              <div className="tech">
+                {tecnologies?.map((tech, idx) => (
+                  <span key={idx}>{tech}</span>
+                ))}
+              </div>
+            )}
+          </span>
         </div>
-        {tecnologies && (
-          <div className="tech">
-            {tecnologies?.map((tech, idx) => (
-              <span key={idx}>{tech}</span>
-            ))}
-          </div>
-        )}
       </section>
     </CardContainer>
   );
@@ -49,7 +56,7 @@ const CardContainer = styled.div`
   gap: 20px;
   width: calc(100% - 23px);
   border-radius: 5px;
-  padding: 10px;
+  padding: 20px;
   cursor: pointer;
   transition: 0.3s ease-in-out;
   max-height: 250px;
@@ -81,6 +88,21 @@ const CardContainer = styled.div`
     font-size: 30px;
     font-weight: 500;
     flex-direction: column;
+
+    .info-box {
+      display: flex;
+
+      > span:first-child{
+        width: 15%;
+      }
+
+      > span:nth-of-type(2) {
+        gap: 15px;
+        display: flex;
+        flex-direction: column;
+        width: 75%
+      }
+    }
 
     .tech {
       display: flex;
