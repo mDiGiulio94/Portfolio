@@ -1,19 +1,32 @@
 import React from "react";
 import styled from "styled-components";
 
-
-export default function Card({titleCard, items, onClick, image, alt, name, role, duration, description, tecnologies }) {
-
-
+export default function Card({
+  titleCard,
+  items,
+  onClick,
+  image,
+  alt,
+  name,
+  role,
+  duration,
+  description,
+  tecnologies,
+}) {
   return (
     <CardContainer onClick={onClick}>
       <section>
-        <h2>{titleCard}:</h2>
-        {name}
-        {role}
-        {duration}
-        {description}
-       <span className="tech">{tecnologies}</span> 
+        <div>
+          {name}
+          {role}
+          {duration}
+          {description}
+        </div>
+        <div className="tech">
+          {tecnologies.map((tech, idx) => (
+            <span key={idx}>{tech}</span>
+          ))}
+        </div>
       </section>
     </CardContainer>
   );
@@ -24,18 +37,20 @@ const CardContainer = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 20px;
-  width: 100%;
+  width: calc(100% - 23px);
   border-radius: 5px;
   border: 1px solid #ccc;
-  box-shadow: 0 8px 10px rgba(2, 6, 23, 0.12);
+ background: linear-gradient(135deg,#0f172a,#1f2937);
   padding: 10px;
   cursor: pointer;
   transition: 0.2s ease-in-out;
-  height: 300px;
+  max-height: 250px;
+  height: fit-content;
   justify-content: center;
+  filter: brightness(0.8);
 
   &:hover {
-    border-color: #1b3b6f;
+    filter: brightness(1);
   }
 
   h2 {
@@ -46,18 +61,26 @@ const CardContainer = styled.div`
     text-overflow: ellipsis;
   }
 
-  section{
+  section {
     display: flex;
     align-items: center;
     gap: 10px;
     font-size: 30px;
     font-weight: 500;
+    flex-direction: column;
 
-    .tech{
-        display: flex;
-        align-items: center;
-        font-size: 16px;
+    .tech {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-size: 16px;
+      
 
+      span {
+        border-radius: 18px;
+        padding: 5px 10px;
+        background: linear-gradient(180deg, #f1f5f9 0%, #ffffff 100%);
+      }
     }
   }
 `;

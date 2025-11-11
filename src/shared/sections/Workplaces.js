@@ -46,4 +46,8 @@ export default function Workplaces() {
   );
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+display: flex;
+flex-direction: column;
+gap: 20px;
+`;

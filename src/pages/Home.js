@@ -28,7 +28,7 @@ const Container = styled.div`
   padding-right: 3rem;
   padding-top: 6rem;
   padding-bottom: 6rem;
-  gap: 16px
+  gap: 16px;
 `;
 
 const ContainerLeft = styled.div`
@@ -38,6 +38,9 @@ const ContainerLeft = styled.div`
 `;
 
 const ContainerRight = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
   width: 50%;
   overflow-y: auto;
 `;

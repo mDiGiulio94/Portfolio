@@ -14,6 +14,13 @@ body {
   background-color: #0f172a;
   font-family: 'Oswald', 'sans-serif';
   font-weight: 200;
+   color: #D1FAE5;
+   /* color:#A7F3D0; */
+   /* color: #CFFAFE; */
+   /* rosso buono per cancelare */
+   /* color: #EF4444; */
+   /* color: #94A3B8; */
+
 }
 
 h1,
@@ -24,7 +31,7 @@ h5,
 h6,
 p {
   margin: 0;
-  color: #eff1f2;
+  /* color: #eff1f2; */
   font-weight: 400!important;
 }
 
