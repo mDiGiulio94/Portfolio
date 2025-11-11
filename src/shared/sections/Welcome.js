@@ -14,8 +14,9 @@ export default function Welcome() {
       {it.welcome.map((item, idx) => (
         <section key={idx} className="welcome-section">
           <h1>{item.benvenuto}</h1>
-          <h2>{item.nome}</h2>
-          <h3>{item.specializzazione}</h3>
+          <h2>
+            {item.nome}, {item.specializzazione}
+          </h2>
           <p>{item.descrizione}</p>
         </section>
       ))}

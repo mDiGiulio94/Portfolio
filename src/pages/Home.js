@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Welcome from "../shared/sections/Welcome.js";
 import Presentazione from "../shared/sections/Presentation.js";
+import Workplaces from "../shared/sections/Workplaces.js";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
 
       <ContainerRight>
         <Presentazione />
+        <Workplaces />
       </ContainerRight>
     </Container>
   );
@@ -30,14 +32,12 @@ const Container = styled.div`
 `;
 
 const ContainerLeft = styled.div`
-  border: 1px solid #fff;
   width: 50%;
   top: 0;
   position: sticky;
 `;
 
 const ContainerRight = styled.div`
-  border: 1px solid #fff;
   width: 50%;
   overflow-y: auto;
 `;
