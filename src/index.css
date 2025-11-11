@@ -6,9 +6,34 @@
   font-weight: 900;
 }
 
+:root{
+  /* base */
+  --fs-body: clamp(16px, 0.30vw + 15px, 18px);
+  --lh-body: 1.6;
+
+  /* titoli */
+  --fs-h6: clamp(18px, 0.40vw + 16px, 20px);
+  --fs-h5: clamp(20px, 0.60vw + 17px, 24px);
+  --fs-h4: clamp(22px, 0.90vw + 18px, 28px);
+  --fs-h3: clamp(26px, 1.30vw + 18px, 32px);
+  --fs-h2: clamp(32px, 2.10vw + 18px, 40px);
+  --fs-h1: clamp(36px, 3.40vw + 18px, 64px); /* puoi spingere a 72–80px per hero */
+
+  --lh-h: 1.2;
+}
+
+h1 { font-size: var(--fs-h1); line-height: var(--lh-h); }
+h2 { font-size: var(--fs-h2); line-height: var(--lh-h); }
+h3 { font-size: var(--fs-h3); line-height: var(--lh-h); }
+h4 { font-size: var(--fs-h4); line-height: var(--lh-h); }
+h5 { font-size: var(--fs-h5); line-height: var(--lh-h); }
+h6 { font-size: var(--fs-h6); line-height: var(--lh-h); }
+.small, small { font-size: clamp(14px, 0.2vw + 13px, 16px); line-height: 1.5; }
+
 body {
   margin: 0;
   font-family: "Soulmaze",sans-serif;
+  font-size: var(--fs-body); line-height: var(--lh-body); 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #0f172a;

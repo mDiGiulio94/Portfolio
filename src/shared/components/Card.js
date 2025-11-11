@@ -25,16 +25,18 @@ export default function Card({
     >
       <section>
         <div>
-          {name}
-          {role}
-          {duration}
-          {description}
+          {name ?? ""}
+          {role ?? ""}
+          {duration ?? ""}
+          {description ?? ""}
         </div>
-        <div className="tech">
-          {tecnologies.map((tech, idx) => (
-            <span key={idx}>{tech}</span>
-          ))}
-        </div>
+        {tecnologies && (
+          <div className="tech">
+            {tecnologies?.map((tech, idx) => (
+              <span key={idx}>{tech}</span>
+            ))}
+          </div>
+        )}
       </section>
     </CardContainer>
   );
@@ -49,13 +51,13 @@ const CardContainer = styled.div`
   border-radius: 5px;
   padding: 10px;
   cursor: pointer;
-  transition: 0.2s ease-in-out;
+  transition: 0.3s ease-in-out;
   max-height: 250px;
   height: fit-content;
   justify-content: center;
   opacity: 1;
 
-   &.dimmed {
+  &.dimmed {
     opacity: 0.3;
   }
 
@@ -74,7 +76,7 @@ const CardContainer = styled.div`
 
   section {
     display: flex;
-    align-items: center;
+    width: 100%;
     gap: 10px;
     font-size: 30px;
     font-weight: 500;

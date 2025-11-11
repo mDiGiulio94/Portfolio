@@ -3,8 +3,13 @@ import styled from "styled-components";
 import Welcome from "../shared/sections/Welcome.js";
 import Presentazione from "../shared/sections/Presentation.js";
 import Workplaces from "../shared/sections/Workplaces.js";
+import Projects from "../shared/sections/Projects.js";
+import useMediaQuery from "../shared/hooks/hooks.js";
 
 export default function Home() {
+
+    const isSmall = useMediaQuery()
+
   return (
     <Container>
       <ContainerLeft>
@@ -14,6 +19,7 @@ export default function Home() {
       <ContainerRight>
         <Presentazione />
         <Workplaces />
+        <Projects />
       </ContainerRight>
     </Container>
   );
@@ -29,6 +35,15 @@ const Container = styled.div`
   padding-top: 6rem;
   padding-bottom: 6rem;
   gap: 16px;
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+ -ms-overflow-style: none;
+  scrollbar-width: none;
+
+
 `;
 
 const ContainerLeft = styled.div`
