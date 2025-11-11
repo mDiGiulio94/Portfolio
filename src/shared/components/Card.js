@@ -33,29 +33,24 @@ export default function Card({
 }
 
 const CardContainer = styled.div`
-  position: relative;
-  padding: 1.75rem;
-  border-radius: 22px;
-  transition: all 0.3s;
   display: flex;
+  align-items: center;
   flex-direction: column;
-  gap: 1.2rem;
-  overflow: hidden;
-  isolation: isolate;
-  z-index: 0;
+  gap: 20px;
+  width: calc(100% - 23px);
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  max-height: 250px;
+  height: fit-content;
+  justify-content: center;
 
   &:hover {
-    opacity: 1;
-    background: linear-gradient(
-        140deg,
-        #0f172ad9 0%,
-        #0f172a99 45%,
-        #1e293b8c 100%
-      ),
-      #0f172abf;
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
+    background: #1e293b;
+    box-shadow: inset 0 0 0 0 #94a3b8;
   }
+
   h2 {
     font-size: 30px;
     font-weight: 500;
@@ -80,8 +75,10 @@ const CardContainer = styled.div`
 
       span {
         border-radius: 18px;
-        padding: 5px 10px;
-        background: linear-gradient(180deg, #f1f5f9 0%, #ffffff 100%);
+        padding: 8px 15px;
+        background: #a7f3d038;
+        box-shadow: inset 0 0 0 0 #a7f3d0;
+        color: #5eead4;
       }
     }
   }
