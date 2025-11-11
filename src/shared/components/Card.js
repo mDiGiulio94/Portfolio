@@ -33,26 +33,29 @@ export default function Card({
 }
 
 const CardContainer = styled.div`
+  position: relative;
+  padding: 1.75rem;
+  border-radius: 22px;
+  transition: all 0.3s;
   display: flex;
-  align-items: center;
   flex-direction: column;
-  gap: 20px;
-  width: calc(100% - 23px);
-  border-radius: 5px;
-  border: 1px solid #ccc;
- background: linear-gradient(135deg,#0f172a,#1f2937);
-  padding: 10px;
-  cursor: pointer;
-  transition: 0.2s ease-in-out;
-  max-height: 250px;
-  height: fit-content;
-  justify-content: center;
-  filter: brightness(0.8);
+  gap: 1.2rem;
+  overflow: hidden;
+  isolation: isolate;
+  z-index: 0;
 
   &:hover {
-    filter: brightness(1);
+    opacity: 1;
+    background: linear-gradient(
+        140deg,
+        #0f172ad9 0%,
+        #0f172a99 45%,
+        #1e293b8c 100%
+      ),
+      #0f172abf;
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
   }
-
   h2 {
     font-size: 30px;
     font-weight: 500;
@@ -74,7 +77,6 @@ const CardContainer = styled.div`
       gap: 10px;
       align-items: center;
       font-size: 16px;
-      
 
       span {
         border-radius: 18px;
