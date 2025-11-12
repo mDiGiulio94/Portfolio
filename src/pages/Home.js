@@ -31,10 +31,6 @@ const Container = styled.div`
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 3rem;
-  padding-right: 3rem;
-  padding-top: 6rem;
-  padding-bottom: 6rem;
   gap: 16px;
   align-items: flex-start;
 

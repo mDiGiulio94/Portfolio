@@ -9,7 +9,7 @@ export default function Table({columns, items, error, loading, onRowClick, rowKe
 
     if (loading && items?.length === 0)
     return ( 
-      <div className="spin-container">
+      <div className="loading-container">
         <Loading />
       </div>
     );
@@ -55,7 +55,7 @@ export default function Table({columns, items, error, loading, onRowClick, rowKe
                   if (content === undefined || content === null || content === '') content = '-';
 
                   return (
-                    <Td key={cIdx}>
+                    <Td key={cIdx} data-col={col.id || cIdx}>
                       {content}
                     </Td>
                   );
@@ -101,7 +101,6 @@ const Td = styled.td`
   text-overflow: ellipsis;
   max-width: 1px; /* trucco per far funzionare ellipsis con table-layout: fixed */
   font-variant-numeric: tabular-nums;
-  cursor: pointer;
 
   &[data-align="right"] {
     text-align: right;
