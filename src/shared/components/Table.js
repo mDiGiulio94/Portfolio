@@ -2,13 +2,18 @@ import styled from "styled-components";
 import Loading from "../../feature/Loading";
 
 const getAtPath = (obj, path) =>
-  path.split('.').reduce((acc, k) => (acc == null ? acc : acc[k]), obj);
+  path.split(".").reduce((acc, k) => (acc == null ? acc : acc[k]), obj);
 
-
-export default function Table({columns, items, error, loading, onRowClick, rowKey }) {
-
-    if (loading && items?.length === 0)
-    return ( 
+export default function Table({
+  columns,
+  items,
+  error,
+  loading,
+  onRowClick,
+  rowKey,
+}) {
+  if (loading && items?.length === 0)
+    return (
       <div className="loading-container">
         <Loading />
       </div>
@@ -40,7 +45,7 @@ export default function Table({columns, items, error, loading, onRowClick, rowKe
               <Tr
                 key={key}
                 onClick={onRowClick ? () => onRowClick(row) : undefined}
-                role={onRowClick ? 'button' : undefined}
+                role={onRowClick ? "button" : undefined}
               >
                 {columns.map((col, cIdx) => {
                   let content = null;
@@ -48,11 +53,16 @@ export default function Table({columns, items, error, loading, onRowClick, rowKe
                     content = col.accessor(row);
                   } else if (col.key) {
                     content =
-                      typeof col.key === 'string'
-                        ? getAtPath(row , col.key)
-                        : (row )[col.key];
+                      typeof col.key === "string"
+                        ? getAtPath(row, col.key)
+                        : row[col.key];
                   }
-                  if (content === undefined || content === null || content === '') content = '-';
+                  if (
+                    content === undefined ||
+                    content === null ||
+                    content === ""
+                  )
+                    content = "-";
 
                   return (
                     <Td key={cIdx} data-col={col.id || cIdx}>
@@ -73,18 +83,20 @@ const TableX = styled.table`
   width: 100%;
   font-size: 14px;
   overflow-x: auto;
-  border-collapse: separate;
+  border-collapse: collapse;
   border-radius: 5px;
   box-shadow: 0 8px 10px rgba(2, 6, 23, 0.12);
-  padding: 10px;
 `;
 
 const Thead = styled.thead``;
 
-const Tbody = styled.tbody``;
-
-const Tr = styled.tr`
+const Tbody = styled.tbody`
+  & > tr {
+    border-bottom: 1px solid #ccc;
+  }
 `;
+
+const Tr = styled.tr``;
 
 const Th = styled.th`
   padding: 6px 8px;
@@ -95,7 +107,7 @@ const Th = styled.th`
 `;
 
 const Td = styled.td`
-  padding: 10px 8px;
+  padding: 30px 8px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

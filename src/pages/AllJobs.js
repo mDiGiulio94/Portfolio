@@ -27,7 +27,7 @@ export default function AllJobs() {
     {
       label: <h5>Anno</h5> ,
       width: "10%",
-      accessor: (progetti) =><p>{progetti.anno ?? "-"}</p>,
+      accessor: (progetti) =><p className="specialP">{progetti.anno ?? "-"}</p>,
     },
     {
       label: <h5>Progetto</h5> ,
@@ -37,7 +37,7 @@ export default function AllJobs() {
     {
       label: <h5>Azienda</h5> ,
       width: "15%",
-      accessor: (progetti) =><p>{progetti.azienda ?? "-"}</p>,
+      accessor: (progetti) =><p className="specialP">{progetti.azienda ?? "-"}</p>,
     },
     {
       label: <h5>Link</h5> ,
@@ -60,8 +60,18 @@ export default function AllJobs() {
     },
   ];
 
-  return <Table columns={columns} items={progetti} />;
+  return (
+  <Container>
+
+ <Table columns={columns} items={progetti} />
+  </Container>
+ );
 }
+
+const Container = styled.div`
+padding-left: 5rem;
+padding-right: 5.7rem;
+`;
 
 const TechContainer = styled.div`
   display: flex;
@@ -80,5 +90,6 @@ const TechContainer = styled.div`
     background: #a7f3d038;
     box-shadow: inset 0 0 0 0 #a7f3d0;
     color: #5eead4;
+    font-weight: 400;
   }
 `;

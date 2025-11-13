@@ -4,6 +4,7 @@ import Card from "../components/Card";
 
 export default function Workplaces() {
 
+
     const [hoverCard, setHoverCard] = useState(null);
 
   const items = [
@@ -49,6 +50,7 @@ export default function Workplaces() {
         onMouseLeave={() => setHoverCard(null)}
         />
       ))}
+
     </Container>
   );
 }
@@ -58,3 +60,4 @@ display: flex;
 flex-direction: column;
 gap: 20px;
 `;
+
