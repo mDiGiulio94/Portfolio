@@ -7,7 +7,7 @@
 }
 
 /* variabili corrispondenti ai font di tutto il progetto e al loro ridimensionamento quando lo schermo cambia */
-:root{
+:root {
   /* base */
   --fs-body: clamp(16px, 0.30vw + 15px, 18px);
   --lh-body: 1.6;
@@ -21,6 +21,41 @@
   --fs-h1: clamp(36px, 3.40vw + 18px, 64px); /* puoi spingere a 72–80px per hero */
 
   --lh-h: 1.2;
+
+  color-scheme: dark;
+  /* colori tema scuro (default) */
+  --color-background: #0f172a;
+  --color-text: #d1fae5;
+  --color-surface: rgba(15, 23, 42, 0.85);
+  --color-border: rgba(148, 163, 184, 0.4);
+  --color-toggle-bg: rgba(15, 23, 42, 0.75);
+  --color-toggle-text: #f8fafc;
+  --color-toggle-shadow: rgba(15, 23, 42, 0.18);
+  --color-toggle-shadow-hover: rgba(15, 23, 42, 0.26);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --color-background: #f8fafc;
+  --color-text: #0f172a;
+  --color-surface: rgba(255, 255, 255, 0.9);
+  --color-border: rgba(148, 163, 184, 0.45);
+  --color-toggle-bg: rgba(255, 255, 255, 0.9);
+  --color-toggle-text: #0f172a;
+  --color-toggle-shadow: rgba(15, 23, 42, 0.15);
+  --color-toggle-shadow-hover: rgba(15, 23, 42, 0.22);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-background: #0f172a;
+  --color-text: #d1fae5;
+  --color-surface: rgba(15, 23, 42, 0.85);
+  --color-border: rgba(148, 163, 184, 0.4);
+  --color-toggle-bg: rgba(15, 23, 42, 0.75);
+  --color-toggle-text: #f8fafc;
+  --color-toggle-shadow: rgba(15, 23, 42, 0.18);
+  --color-toggle-shadow-hover: rgba(15, 23, 42, 0.26);
 }
 
 h1 { font-size: var(--fs-h1); line-height: var(--lh-h); }
@@ -35,23 +70,24 @@ p { font-size: var(--fs-h6); line-height: var(--lh-h); }
 body {
   margin: 0;
   font-family: "Soulmaze",sans-serif;
-  font-size: var(--fs-body); line-height: var(--lh-body); 
+  font-size: var(--fs-body); line-height: var(--lh-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #0f172a;
+  background-color: var(--color-background);
   font-family: 'Oswald', 'sans-serif';
   font-weight: 200;
-   color: #D1FAE5;
-   /* color:#A7F3D0; */
+  color: var(--color-text);
+  /* color:#A7F3D0; */
    /* color: #CFFAFE; */
-   /* rosso buono per cancelare */
-   /* color: #EF4444; */
-   /* color: #94A3B8; */
-    padding-left: 3rem;
+  /* rosso buono per cancelare */
+  /* color: #EF4444; */
+  /* color: #94A3B8; */
+  padding-left: 3rem;
   padding-right: 3rem;
   padding-top: 6rem;
   padding-bottom: 6rem;
-  
+  transition: background-color 0.4s ease, color 0.4s ease;
+
 
 }
 

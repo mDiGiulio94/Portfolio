@@ -73,15 +73,19 @@ const TableX = styled.table`
   width: 100%;
   font-size: 14px;
   overflow-x: auto;
-  border-collapse: separate;
+  border-collapse: collapse;
   border-radius: 5px;
   box-shadow: 0 8px 10px rgba(2, 6, 23, 0.12);
-  padding: 10px;
+  border-spacing: 0;
 `;
 
 const Thead = styled.thead``;
 
-const Tbody = styled.tbody``;
+const Tbody = styled.tbody`
+  & > tr {
+    border-bottom: 1px solid var(--color-border, #ccc);
+  }
+`;
 
 const Tr = styled.tr`
 `;
