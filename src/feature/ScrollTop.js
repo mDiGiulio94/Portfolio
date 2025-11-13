@@ -62,8 +62,8 @@ const Fab = styled.button`
   width: 48px;               
   height: 48px;
 
-  background: #34495E;        
-  color: #fff;                
+  background: #2b2b2b;        
+  color: #ffd369;                
   padding: 10px;
   font-size: xx-large;
 

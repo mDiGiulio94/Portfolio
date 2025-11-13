@@ -69,8 +69,14 @@ const CardContainer = styled.div`
   }
 
   &:hover {
-    background: #1e293b;
+    /* background: #1e293b; */
+    background: #1b1b1b;
     box-shadow: inset 0 0 0 0 #94a3b8;
+  }
+
+  &:hover .tech > span {
+    color: #1b1b1b;
+    background: #ffd369;
   }
 
   h2 {
@@ -92,7 +98,7 @@ const CardContainer = styled.div`
     .info-box {
       display: flex;
 
-      > span:first-child{
+      > span:first-child {
         width: 15%;
       }
 
@@ -100,7 +106,7 @@ const CardContainer = styled.div`
         gap: 15px;
         display: flex;
         flex-direction: column;
-        width: 75%
+        width: 75%;
       }
     }
 
@@ -113,9 +119,13 @@ const CardContainer = styled.div`
       span {
         border-radius: 18px;
         padding: 8px 15px;
-        background: #a7f3d038;
-        box-shadow: inset 0 0 0 0 #a7f3d0;
-        color: #5eead4;
+        /* background: #a7f3d038; */
+        /* box-shadow: inset 0 0 0 0 #a7f3d0; */
+        background: #1b1b1b;
+        box-shadow: inset 0 0 0 0 #2b2b2b;
+        /* color: #5eead4; */
+        color: #ffd369;
+         transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
       }
     }
   }
