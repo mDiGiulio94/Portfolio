@@ -75,7 +75,6 @@ const TableX = styled.table`
   overflow-x: auto;
   border-collapse: separate;
   border-radius: 5px;
-  border: 1px solid #ccc;
   box-shadow: 0 8px 10px rgba(2, 6, 23, 0.12);
   padding: 10px;
 `;
@@ -84,7 +83,8 @@ const Thead = styled.thead``;
 
 const Tbody = styled.tbody``;
 
-const Tr = styled.tr``;
+const Tr = styled.tr`
+`;
 
 const Th = styled.th`
   padding: 6px 8px;
@@ -101,7 +101,6 @@ const Td = styled.td`
   text-overflow: ellipsis;
   max-width: 1px; /* trucco per far funzionare ellipsis con table-layout: fixed */
   font-variant-numeric: tabular-nums;
-
   &[data-align="right"] {
     text-align: right;
   }
