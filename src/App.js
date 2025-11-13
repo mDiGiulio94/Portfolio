@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Loading from "./feature/Loading.js";
 import ScrollTop from "./feature/ScrollTop.js";
+import ColorMode from "./feature/ColorMode.js";
 
 const Home = lazy(() => import("./pages/Home.js"));
 const AllJobs = lazy(() => import("./pages/AllJobs.js"));
@@ -16,6 +17,7 @@ const AllJobs = lazy(() => import("./pages/AllJobs.js"));
 function App() {
   return (
     <Router>
+      <ColorMode />
       <Suspense fallback={
         <div className="loading-container">
     <Loading />
