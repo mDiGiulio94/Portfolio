@@ -81,4 +81,7 @@ const ServiceContainer = styled.div`
   border: 1px solid var(--color-border);
   width: 100%;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;

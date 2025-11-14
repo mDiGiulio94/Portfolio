@@ -119,6 +119,7 @@ const Button = styled.button`
   background: var(--color-background);
   padding: 10px 20px;
   border-radius: 5px;
+  border: 1px solid #ccc;
   transition: ease-in-out 0.2s;
   cursor: pointer;
   position: relative;
