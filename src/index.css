@@ -215,6 +215,7 @@ html {
     position: absolute;
     left: 12px;
     top: 17px;
+    font-weight: 500;
     padding: 0 4px;
     background: #fff; /* copre il bordo quando sale */
     color: var(--color-text);
@@ -223,6 +224,7 @@ html {
     line-height: 1;
     pointer-events: none; /* click passa all’input */
     transition: transform 0.2s ease, color 0.2s ease, font-size 0.2s ease;
+
   }
 
   /* 1) Quando il campo è in focus → label sale */
