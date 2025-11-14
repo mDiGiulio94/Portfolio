@@ -108,8 +108,8 @@ const TechContainer = styled.div`
     /* background: #a7f3d038; */
     box-shadow: inset 0 0 0 0 #a7f3d0;
     /* color: #5eead4; */
-    background: #1b1b1b;
-    color: #ffd369;
+    background: var(--color-text-span-hover);
+    color:  var(--color-span-hover);
     font-weight: 400;
   }
 `;

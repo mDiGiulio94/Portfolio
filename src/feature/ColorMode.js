@@ -129,7 +129,7 @@ const ToggleButton = styled.button`
   }
 
   &:focus-visible {
-    outline: 3px solid #5eead499;
+    outline: 3px solid rgba(94, 234, 212, 0.6);
     outline-offset: 2px;
   }
 

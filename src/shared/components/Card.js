@@ -70,13 +70,14 @@ const CardContainer = styled.div`
 
   &:hover {
     /* background: #1e293b; */
-    background: #1b1b1b;
+    background: var(--color-hover-card);
     box-shadow: inset 0 0 0 0 #94a3b8;
   }
 
+
   &:hover .tech > span {
-    color: #1b1b1b;
-    background: #ffd369;
+    color: var(--color-text-span-hover);
+    background: var(--color-span-hover);
   }
 
   h2 {
@@ -116,15 +117,16 @@ const CardContainer = styled.div`
       align-items: center;
       font-size: 16px;
 
+
       span {
         border-radius: 18px;
         padding: 8px 15px;
         /* background: #a7f3d038; */
         /* box-shadow: inset 0 0 0 0 #a7f3d0; */
-        background: #1b1b1b;
+        background: var(--color-text-span-hover);
         box-shadow: inset 0 0 0 0 #2b2b2b;
         /* color: #5eead4; */
-        color: #ffd369;
+        color: var(--color-span-hover);
          transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
       }
     }
