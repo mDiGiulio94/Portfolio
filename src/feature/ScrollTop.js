@@ -62,8 +62,8 @@ const Fab = styled.button`
   width: 48px;               
   height: 48px;
 
-  background: #2b2b2b;        
-  color: #ffd369;                
+  background:var(--color-scroll-top);        
+  color: var(--color-text);                
   padding: 10px;
   font-size: xx-large;
 
@@ -72,7 +72,7 @@ const Fab = styled.button`
   justify-content: center;
 
   border: 0;
-  box-shadow: 0px 0px 2px 0px rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 0px 2px 0px var(--color-border);
 
   opacity: ${(p) => (p.$visible ? 1 : 0)};             
   pointer-events: ${(p) => (p.$visible ? "auto" : "none")};
@@ -80,7 +80,7 @@ const Fab = styled.button`
   cursor: ${(p) => (p.$visible ? "pointer" : "default")};
 
   &:focus-visible {
-    outline: 2px solid #fff;
+    outline: 2px solid var(--color-focus-outline);
     outline-offset: 2px;
   }
 `;
