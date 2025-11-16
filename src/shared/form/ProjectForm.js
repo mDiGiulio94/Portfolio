@@ -1,11 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import { ProjectPost } from "../../API/ProjectApi";
 
 export default function ProjectForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
@@ -13,17 +15,22 @@ export default function ProjectForm() {
       workplace: "",
       date: "",
       description: "",
-      tecnologies: "",
+      tecnologies: [],
     },
   });
 
+  const onReset = () => {
+    reset();
+  };
+
   const onSubmit = async (data) => {
-    console.log("dati inviati", data);
+  await  ProjectPost(data);
+    onReset();
   };
 
   return (
     <>
-      <Form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <Form noValidate>
         <div className="col">
           <label htmlFor="name">Nome</label>
           <input
@@ -68,6 +75,13 @@ export default function ProjectForm() {
             id="tecnologies"
             {...register("tecnologies", {
               required: "Le tecnologie sono obbligatorie",
+              setValueAs: (value) => {
+                if (typeof value !== "string") return [];
+                return value
+                  .split(",")
+                  .map((v) => v.trim())
+                  .filter(Boolean);
+              },
             })}
           />
           {errors.tecnologies && (
@@ -89,9 +103,14 @@ export default function ProjectForm() {
         </div>
       </Form>
       <ContainerBtn>
-        <Button type="submit" disabled={isSubmitting}>
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          onClick={handleSubmit(onSubmit)}
+        >
           {isSubmitting ? "Invio..." : "Pubblica"}
         </Button>
+        <Button onClick={onReset}>Annula</Button>
       </ContainerBtn>
     </>
   );
@@ -110,6 +129,7 @@ const Form = styled.form`
 
 const ContainerBtn = styled.div`
   display: flex;
+  gap: 15px;
   align-items: center;
   width: 100%;
 `;

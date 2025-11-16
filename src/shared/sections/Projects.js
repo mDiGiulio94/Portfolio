@@ -1,43 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Card from "../components/Card";
 import { useNavigate } from "react-router-dom";
+import { GetProgetti } from "../../API/ProjectApi";
 
 export default function Projects() {
   const navigate = useNavigate();
 
   const [hoverCard, setHoverCard] = useState(null);
+  const [progetti, setProgetti] = useState([]);
 
-  const items = [
-    {
-      id: 1,
-      nome: "Progetto 1",
-      descrizione:
-        "Compiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoro",
-    },
-    {
-      id: 2,
-      nome: "Progetto 2",
-      descrizione:
-        "Compiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoro",
-    },
-    {
-      id: 3,
-      nome: "Progetto 3",
-      descrizione:
-        "Compiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoroCompiti del lavoro",
-      tecnologie: ["React", "Node.js", "Firebase"],
-    },
-  ];
+  const fetcProjects = async () => {
+    const res = await GetProgetti();
+    setProgetti(res);
+  };
+
+  useEffect(() => {
+    fetcProjects();
+  }, []);
 
   return (
     <Container>
-      {items.map((i, idx) => (
+
+      
+      {progetti.map((i, idx) => (
         <Card
+          key={idx}
           id={idx}
           name={i.nome}
           description={i.descrizione}
-          items={items}
+          items={progetti}
           tecnologies={i.tecnologie}
           isDimmed={hoverCard !== null && hoverCard !== idx}
           onMouseEnter={() => setHoverCard(idx)}
