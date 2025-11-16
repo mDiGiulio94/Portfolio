@@ -6,15 +6,13 @@ import ExperienceForm from "../shared/form/ExperienceForm";
 
 export default function AdminConsole() {
   const [projectM, setProjectM] = useState(true);
-// eslint-disable-next-line
-  const [experienceM, setExperienceM] = useState(false);
 
   const [visible, setVisible] = useState(false);
 
 //   aggiungi altre condizioni per evitare che premendo sullo stesso input non cambi il booleano
   const handleManagerOption = () => {
     setProjectM((prev) => !prev);
-    setExperienceM((prev) => !prev);
+   
   };
 
   const handleVisible = () => {
@@ -32,8 +30,8 @@ export default function AdminConsole() {
         <>
           <h1>{item.titolo}</h1>
           <div className="service-panel">
-            <p onClick={handleManagerOption}>{item.progetti}</p>
-            <p onClick={handleManagerOption}>{item.esperienze}</p>
+            <p $active={projectM} onClick={handleManagerOption}>{item.progetti}</p>
+            <p $active={!projectM} onClick={handleManagerOption}>{item.esperienze}</p>
           </div>
           <ServiceContainer>
             {projectM ? <ProjectForm /> : <ExperienceForm />}
@@ -66,6 +64,8 @@ const Container = styled.section`
       border-radius: 15px;
       cursor: pointer;
       transition: ease-in-out 0.2s;
+      background: ${(props) =>props.$active ? "var(--color-text-span-hover)" : "transparent"};
+
 
       &:hover {
         background: var(--color-text-span-hover);

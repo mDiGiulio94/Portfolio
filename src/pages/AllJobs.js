@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Table from "../shared/components/Table";
+import { GetProgetti } from "../API/ProjectApi";
 
 export default function AllJobs() {
   const [visible, setVisible] = useState(false);
+  const [progetti, setProgetti] = useState([]);
 
   const handleVisible = () => {
     const timeout = window.requestAnimationFrame(() => setVisible(true));
@@ -11,28 +13,15 @@ export default function AllJobs() {
     return () => window.cancelAnimationFrame(timeout);
   };
 
+    const fetchProjects = async () => {
+      const res = await GetProgetti();
+      setProgetti(res);
+    };
+
   useEffect(() => {
     handleVisible();
+    fetchProjects();
   }, []);
-
-  const progetti = [
-    {
-      id: 1,
-      anno: "2023",
-      progetto: "Portfolio",
-      azienda: "Personale",
-      tecnologie: ["React", "Styled Components"],
-      link: "www.mioprogilo.com",
-    },
-    {
-      id: 2,
-      anno: "2022",
-      progetto: "E-commerce",
-      azienda: "Azienda X",
-      tecnologie: ["Vue", "Node.js", "MongoDB"],
-      link: "www.ecommerce.com",
-    },
-  ];
 
   // rivedi i width quando popolato, fa sparire colonne in base alla dimensione schermo
   const columns = [
@@ -40,19 +29,19 @@ export default function AllJobs() {
       label: <h5>Anno</h5>,
       width: "10%",
       accessor: (progetti) => (
-        <p className="specialP">{progetti.anno ?? "-"}</p>
+        <p className="specialP">{progetti.date ?? "-"}</p>
       ),
     },
     {
       label: <h5>Progetto</h5>,
       width: "15%",
-      accessor: (progetti) => <p>{progetti.progetto ?? "-"}</p>,
+      accessor: (progetti) => <p>{progetti.name ?? "-"}</p>,
     },
     {
       label: <h5>Azienda</h5>,
       width: "15%",
       accessor: (progetti) => (
-        <p className="specialP">{progetti.azienda ?? "-"}</p>
+        <p className="specialP">{progetti.workplace ?? "-"}</p>
       ),
     },
     {
@@ -64,9 +53,9 @@ export default function AllJobs() {
       label: <h5>Anno</h5>,
       width: "45%",
       accessor: (progetti) =>
-        progetti.tecnologie ? (
+        progetti.tecnologies ? (
           <TechContainer>
-            {progetti.tecnologie.map((tech) => (
+            {progetti.tecnologies.map((tech) => (
               <span key={tech.trim()}>{tech.trim()}</span>
             ))}
           </TechContainer>
