@@ -21,8 +21,6 @@ export default function Projects() {
 
   return (
     <Container>
-
-      
       {progetti.map((i, idx) => (
         <Card
           key={idx}
@@ -36,10 +34,11 @@ export default function Projects() {
           onMouseLeave={() => setHoverCard(null)}
         />
       ))}
-
-      <Navigator onClick={() => navigate("/projects")}>
-        Vai all'archivio di tutti i progetti
-      </Navigator>
+      {progetti.length > 0 && (
+        <Navigator onClick={() => navigate("/projects")}>
+          Vai all'archivio di tutti i progetti
+        </Navigator>
+      )}
     </Container>
   );
 }

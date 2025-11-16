@@ -15,7 +15,7 @@ export default function ExperienceForm (){
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
-      name: "",
+      role: "",
       workplace: "",
       date: "",
       description: "",
@@ -34,16 +34,19 @@ export default function ExperienceForm (){
     return(
        <>
       <Form noValidate>
-        <div className="col">
-          <label htmlFor="name">Nome</label>
+
+           <div className="col">
+          <label htmlFor="workplace">Azienda</label>
           <input
             placeholder=" "
-            id="name"
-            {...register("name", {
-              required: "Il nome è obbligatorio",
+            id="workplace"
+            {...register("workplace", {
+              required: "L'azienda è obbligatoria",
             })}
           />
-          {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
+          {errors.workplace && (
+            <p style={{ color: "red" }}>{errors.workplace.message}</p>
+          )}
         </div>
 
         <div className="col">
@@ -57,19 +60,16 @@ export default function ExperienceForm (){
           />
           {errors.date && <p style={{ color: "red" }}>{errors.date.message}</p>}
         </div>
-
-        <div className="col">
-          <label htmlFor="workplace">Azienda</label>
+           <div className="col">
+          <label htmlFor="role">Ruolo</label>
           <input
             placeholder=" "
-            id="workplace"
-            {...register("workplace", {
-              required: "L'azienda è obbligatoria",
+            id="role"
+            {...register("role", {
+              required: "Il ruolo è obbligatorio",
             })}
           />
-          {errors.workplace && (
-            <p style={{ color: "red" }}>{errors.workplace.message}</p>
-          )}
+          {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
         </div>
         <div className="col">
           <label htmlFor="tecnologies">Tecnologie</label>

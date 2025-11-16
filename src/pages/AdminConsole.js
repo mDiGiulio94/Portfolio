@@ -58,28 +58,24 @@ const Container = styled.section`
     gap: 30px;
     align-items: center;
 
-    p {
-      border: 1px solid var(--color-border);
-      padding: 10px 20px;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: ease-in-out 0.2s;
-
-
-      &:hover {
-        background: var(--color-text-span-hover);
-        color: var(--color-span-hover);
-      }
-    }
   }
 `;
 
-const ToggleP = styled.p`      
+const ToggleP = styled.p`
+  border: 1px solid var(--color-border);
+  padding: 10px 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+  background: ${(props) =>
+    props.$active ? "var(--color-text-span-hover)" : "transparent"};
+  color: ${(props) => (props.$active ? "var(--color-span-hover)" : "inherit")};
 
-background: ${(props) =>props.$active ? "var(--color-text-span-hover)" : "transparent"};
-color: ${(props) =>props.$active ? "var(--color-span-hover)" : ""};
+  &:hover {
+    background: var(--color-text-span-hover);
+    color: var(--color-span-hover);
+  }
 `;
-
 const ServiceContainer = styled.div`
   max-width: 1280px;
   margin: auto;

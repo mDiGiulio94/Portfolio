@@ -13,10 +13,10 @@ export default function AllJobs() {
     return () => window.cancelAnimationFrame(timeout);
   };
 
-    const fetchProjects = async () => {
-      const res = await GetProgetti();
-      setProgetti(res);
-    };
+  const fetchProjects = async () => {
+    const res = await GetProgetti();
+    setProgetti(res);
+  };
 
   useEffect(() => {
     handleVisible();
@@ -67,12 +67,16 @@ export default function AllJobs() {
 
   return (
     <Container $visible={visible}>
+      <h1>Tutti i progetti</h1>
       <Table columns={columns} items={progetti} />
     </Container>
   );
 }
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
   padding-left: 5rem;
   padding-right: 5.7rem;
   opacity: ${(props) => (props.$visible ? 1 : 0)};
@@ -98,7 +102,7 @@ const TechContainer = styled.div`
     box-shadow: inset 0 0 0 0 #a7f3d0;
     /* color: #5eead4; */
     background: var(--color-text-span-hover);
-    color:  var(--color-span-hover);
+    color: var(--color-span-hover);
     font-weight: 400;
   }
 `;

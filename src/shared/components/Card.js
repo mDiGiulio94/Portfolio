@@ -74,7 +74,6 @@ const CardContainer = styled.div`
     box-shadow: inset 0 0 0 0 #94a3b8;
   }
 
-
   &:hover .tech > span {
     color: var(--color-text-span-hover);
     background: var(--color-span-hover);
@@ -108,6 +107,11 @@ const CardContainer = styled.div`
         display: flex;
         flex-direction: column;
         width: 75%;
+
+        p {
+          box-sizing: border-box;
+          overflow-wrap: break-word;
+        }
       }
     }
 
@@ -116,7 +120,6 @@ const CardContainer = styled.div`
       gap: 10px;
       align-items: center;
       font-size: 16px;
-
 
       span {
         border-radius: 18px;
@@ -127,7 +130,7 @@ const CardContainer = styled.div`
         box-shadow: inset 0 0 0 0 #2b2b2b;
         /* color: #5eead4; */
         color: var(--color-span-hover);
-         transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
       }
     }
   }
