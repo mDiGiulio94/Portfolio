@@ -30,8 +30,8 @@ export default function AdminConsole() {
         <>
           <h1>{item.titolo}</h1>
           <div className="service-panel">
-            <p $active={projectM} onClick={handleManagerOption}>{item.progetti}</p>
-            <p $active={!projectM} onClick={handleManagerOption}>{item.esperienze}</p>
+            <ToggleP $active={projectM} onClick={handleManagerOption}>{item.progetti}</ToggleP>
+            <ToggleP $active={!projectM} onClick={handleManagerOption}>{item.esperienze}</ToggleP>
           </div>
           <ServiceContainer>
             {projectM ? <ProjectForm /> : <ExperienceForm />}
@@ -64,7 +64,6 @@ const Container = styled.section`
       border-radius: 15px;
       cursor: pointer;
       transition: ease-in-out 0.2s;
-      background: ${(props) =>props.$active ? "var(--color-text-span-hover)" : "transparent"};
 
 
       &:hover {
@@ -73,6 +72,12 @@ const Container = styled.section`
       }
     }
   }
+`;
+
+const ToggleP = styled.p`      
+
+background: ${(props) =>props.$active ? "var(--color-text-span-hover)" : "transparent"};
+color: ${(props) =>props.$active ? "var(--color-span-hover)" : ""};
 `;
 
 const ServiceContainer = styled.div`
