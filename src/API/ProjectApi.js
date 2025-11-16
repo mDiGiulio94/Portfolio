@@ -1,13 +1,11 @@
 import axios from "axios";
 
-const BASE_URL = "https://portfolio-38468-default-rtdb.firebaseio.com/"
+const BASE_URL = "https://portfolio-38468-default-rtdb.firebaseio.com/";
 const API_URL = `${BASE_URL}/projects.json`;
-
 
 // Post dei progetti
 
 export const ProjectPost = async (project) => {
-
   const { ...data } = project; // i file non devono arrivare qui
   const payload = {
     ...data,
@@ -22,16 +20,21 @@ export const ProjectPost = async (project) => {
   }
 };
 
-
 // GET: tutti i progetti
 export const GetProgetti = async () => {
   try {
     const resp = await axios.get(API_URL);
     const data = resp.data;
     if (data == null) return [];
-    return Object.entries(data).map(([id, projects]) => ({ id, ...projects }));
+    return Object.entries(data).map(([id, projects]) => ({
+      id,
+      ...projects,
+      tecnologies: Array.isArray(projects?.tecnologies)
+        ? projects.tecnologies
+        : Object.values(projects?.tecnologies ?? {}),
+    }));
   } catch (error) {
-    console.error("Errore in getArticoli:", error);
+    console.error("Error in GetProgetti:", error);
 
     if (axios.isAxiosError?.(error)) {
       const msg =

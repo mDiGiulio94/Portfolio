@@ -27,10 +27,10 @@ export default function Projects() {
         <Card
           key={idx}
           id={idx}
-          name={i.nome}
-          description={i.descrizione}
+          name={i.name}
+          description={i.description}
           items={progetti}
-          tecnologies={i.tecnologie}
+          tecnologies={i.tecnologies}
           isDimmed={hoverCard !== null && hoverCard !== idx}
           onMouseEnter={() => setHoverCard(idx)}
           onMouseLeave={() => setHoverCard(null)}
