@@ -36,7 +36,7 @@ export default function Projects() {
       ))}
       {progetti.length > 0 && (
         <Navigator onClick={() => navigate("/projects")}>
-          Vai all'archivio di tutti i progetti
+          Archivio progetti
         </Navigator>
       )}
     </Container>
@@ -51,6 +51,15 @@ const Container = styled.div`
 const Navigator = styled.h5`
   display: flex;
   align-items: center;
-  padding: 0 20px;
   cursor: pointer;
+  width: fit-content;
+  border: 1px solid var(--color-border);
+  padding: 10px 20px;
+  border-radius: 15px;
+  transition: ease-in-out 0.2s;
+
+    &:hover {
+    background: var(--color-text-span-hover);
+    color: var(--color-span-hover);
+  }
 `;
