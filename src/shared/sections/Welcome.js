@@ -20,27 +20,35 @@ export default function Welcome() {
             </h3>
             <p>{item.descrizione}</p>
           </section>
-            <ExternalLinks>
-        {Images.map((imageItem, idx) => (
-          <a
-            key={idx}
-            target="_blank"
-            href={imageItem.link}
-            rel="noopener noreferrer"
-          >
-            <img src={imageItem.img} alt={imageItem.alt} loading="lazy" />
-          </a>
-        ))}
-      </ExternalLinks>
+          <ExternalLinks>
+            {Images.map((imageItem, idx) => (
+              <a
+                key={idx}
+                target="_blank"
+                href={imageItem.link}
+                rel="noopener noreferrer"
+              >
+                <img src={imageItem.img} alt={imageItem.alt} loading="lazy" />
+              </a>
+            ))}
+          </ExternalLinks>
           <InternalLinks>
             <ul>
               <li>
                 <div>
-                   <span>{item.about}</span>
+                  <span>{item.about}</span>
                 </div>
-               </li>
-              <li><div><span>{item.workplace}</span></div></li>
-              <li><div><span>{item.progetti}</span></div></li>
+              </li>
+              <li>
+                <div>
+                  <span>{item.workplace}</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span>{item.progetti}</span>
+                </div>
+              </li>
             </ul>
           </InternalLinks>
         </>
@@ -84,21 +92,23 @@ const InternalLinks = styled.section`
     gap: 60px;
     padding: 0;
     li {
+      cursor:pointer;
       list-style: none;
       margin: 0 5px;
-      div{
+      font-weight: 400;
+      div {
         padding-left: 5px;
-      width: 120px;
-      height: 60px;
-      text-decoration: none;
-      border: 1px solid #ccc;
-      display: flex;
-      align-items: center;
-      text-align: left;
-      transform: rotate(-30deg) skew(25deg) translate(0, 0);
-      /* box-shadow: -20px 20px 10px var(--color-shadow); */
-      color: var(--color-text);
-      transition: 0.5s;
+        width: 135px;
+        height: 60px;
+        text-decoration: none;
+        border: 1px solid #ccc;
+        display: flex;
+        align-items: center;
+        text-align: left;
+        transform: rotate(-30deg) skew(25deg) translate(0, 0);
+        box-shadow: -20px 20px 10px var(--color-shadow);
+        color: var(--color-text);
+        transition: ease-in-out 0.3s;
       }
     }
   }
@@ -113,6 +123,7 @@ const InternalLinks = styled.section`
     left: -20px;
     transform: rotate(0deg) skewY(-45deg);
     background: var(--color-text);
+    transition: ease-in-out 0.3s;
   }
 
   div:after {
@@ -124,25 +135,19 @@ const InternalLinks = styled.section`
     bottom: -20px;
     left: -10px;
     transform: rotate(0deg) skewX(-45deg);
-      background: var(--color-text);
+    background: var(--color-text);
+    transition: ease-in-out 0.3s;
   }
 
   div:hover {
-    transform: rotate(-30deg), skew(25deg) translate(20px -15px);
-    box-shadow: -50px 50px 50px var(--color-shadow);
-    
-
-    &:before{
-      content: '';
- 
+    background: var(--color-text);
+    color: var(--color-background);
+    &:before {
       background: var(--color-hover-card);
-   
     }
 
-    &:after{
-
-      background:var(--color-hover-card);
-
+    &:after {
+      background: var(--color-hover-card);
     }
   }
 `;
