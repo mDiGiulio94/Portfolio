@@ -23,17 +23,31 @@ export default function Home() {
 
     // 2. Imposta l'Intersection Observer.
     const observer = new IntersectionObserver(
-      (entries) => {
-        const intersectingEntries = entries.filter((entry) => entry.isIntersecting);
-        if (intersectingEntries.length === 0) return;
+      () => {
+        const sections = [aboutRef.current, workRef.current, projectsRef.current].filter(Boolean);
+        if (sections.length === 0) return;
 
-        // Seleziona la sezione con la maggiore porzione visibile per evitare che l'ultimo
-        // entry processato sovrascriva lo stato quando più sezioni sono contemporaneamente visibili.
-        const mostVisibleEntry = intersectingEntries.reduce((maxEntry, currentEntry) =>
-          currentEntry.intersectionRatio > maxEntry.intersectionRatio ? currentEntry : maxEntry
-        );
+        const viewportCenter = window.innerHeight / 2;
+        let closestSectionId = null;
+        let closestDistance = Infinity;
 
-        setActiveSection(mostVisibleEntry.target.id);
+        sections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+          if (!isVisible) return;
+
+          const sectionCenter = rect.top + rect.height / 2;
+          const distanceFromCenter = Math.abs(sectionCenter - viewportCenter);
+
+          if (distanceFromCenter < closestDistance) {
+            closestDistance = distanceFromCenter;
+            closestSectionId = section.id;
+          }
+        });
+
+        if (closestSectionId) {
+          setActiveSection(closestSectionId);
+        }
       },
       // Imposta una soglia inferiore per aggiornare più velocemente la sezione attiva.
       { threshold: 0.3 }
@@ -57,6 +71,7 @@ export default function Home() {
     };
 
     const targetRef = refs[sectionId];
+    setActiveSection(sectionId);
     // Seleziona l'elemento e naviga
     targetRef?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
