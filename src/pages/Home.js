@@ -17,49 +17,58 @@ export default function Home() {
   const workRef = useRef(null);
   const projectsRef = useRef(null);
 
-  useEffect(() => {
-    // 1. Inizializza l'animazione dopo il mount.
+useEffect(() => {
     setIsContentVisible(true);
 
-    // 2. Imposta l'Intersection Observer.
-    const observer = new IntersectionObserver(
-      () => {
-        const sections = [aboutRef.current, workRef.current, projectsRef.current].filter(Boolean);
-        if (sections.length === 0) return;
+    const getSections = () => [aboutRef.current, workRef.current, projectsRef.current].filter(Boolean);
 
-        const viewportCenter = window.innerHeight / 2;
-        let closestSectionId = null;
-        let closestDistance = Infinity;
+    const updateActiveSection = () => {
+      const sections = getSections();
+      if (sections.length === 0) return;
 
-        sections.forEach((section) => {
-          const rect = section.getBoundingClientRect();
-          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-          if (!isVisible) return;
+      const viewportCenter = window.innerHeight / 2;
+      let closestSectionId = null;
+      let closestDistance = Infinity;
 
-          const sectionCenter = rect.top + rect.height / 2;
-          const distanceFromCenter = Math.abs(sectionCenter - viewportCenter);
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        if (!isVisible) return;
 
-          if (distanceFromCenter < closestDistance) {
-            closestDistance = distanceFromCenter;
-            closestSectionId = section.id;
-          }
-        });
+        const sectionCenter = rect.top + rect.height / 2;
+        const distanceFromCenter = Math.abs(sectionCenter - viewportCenter);
 
-        if (closestSectionId) {
-          setActiveSection(closestSectionId);
+        if (distanceFromCenter < closestDistance) {
+          closestDistance = distanceFromCenter;
+          closestSectionId = section.id;
         }
-      },
-      // Imposta una soglia inferiore per aggiornare più velocemente la sezione attiva.
-      { threshold: 0.3 }
-    );
+      });
 
-    // 3. Osserva le sezioni e filtra i ref nulli.
-    const sectionRefs = [aboutRef.current, workRef.current, projectsRef.current].filter(Boolean);
-    sectionRefs.forEach((section) => observer.observe(section));
+      if (closestSectionId) {
+        setActiveSection((prev) => (prev === closestSectionId ? prev : closestSectionId));
+      }
+    };
 
-    // 4. Cleanup: Disconnette l'observer (invece di unobserve su ogni elemento).
+    // Evita di eseguire updateActiveSection per ogni evento usando requestAnimationFrame.
+    let animationFrame = null;
+    const requestUpdate = () => {
+      if (animationFrame !== null) return;
+      animationFrame = window.requestAnimationFrame(() => {
+        animationFrame = null;
+        updateActiveSection();
+      });
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+
     return () => {
-      observer.disconnect();
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+      if (animationFrame !== null) {
+        window.cancelAnimationFrame(animationFrame);
+      }
     };
   }, []);
 

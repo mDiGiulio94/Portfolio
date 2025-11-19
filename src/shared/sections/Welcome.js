@@ -1,19 +1,22 @@
 import React from "react";
 import styled from "styled-components";
-import it from "../utils/it.json"; // Assumiamo che it.json contenga i dati
+import it from "../utils/it.json";
+import useMediaQuery from "../hooks/hooks";
 
 import linkedin from "../images/icons/linkedin.svg";
 import github from "../images/icons/github.svg";
 
 export default function Welcome({ onNavigate = () => {}, activeSection }) {
-  // Aggiunti URL d'esempio (dovrai aggiornarli con i tuoi link reali)
+  const isSmall = useMediaQuery("(max-width: 1350px)");
+
   const Images = [
-    { img: linkedin, link: "https://www.linkedin.com/in/tuo-profilo", alt: "LinkedIn" },
+    {
+      img: linkedin,
+      link: "https://www.linkedin.com/in/tuo-profilo",
+      alt: "LinkedIn",
+    },
     { img: github, link: "https://github.com/tuo-profilo", alt: "GitHub" },
   ];
-
-  // Rimosso handleKeyDown: il tag <a> gestisce l'interazione da tastiera (Enter/Space)
-  // nativamente quando ha un href.
 
   return (
     <Container>
@@ -46,12 +49,12 @@ export default function Welcome({ onNavigate = () => {}, activeSection }) {
                 </a>
               ))}
             </ExternalLinks>
-            <InternalLinks>
+            <InternalLinks $small={isSmall}>
               <ul>
                 {navigationItems.map((navItem) => (
                   <li key={navItem.id}>
                     <a
-                      href={`#${navItem.id}`} 
+                      href={`#${navItem.id}`}
                       onClick={(e) => {
                         e.preventDefault();
                         onNavigate(navItem.id);
@@ -75,7 +78,7 @@ const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
 
   .welcome-section {
     display: flex;
@@ -103,6 +106,7 @@ const ExternalLinks = styled.section`
 const InternalLinks = styled.section`
   ul {
     display: flex;
+    flex-direction: ${(props) => (props.$small ? "column" : "row")};
     gap: 60px;
     padding: 0;
     li {
@@ -111,19 +115,18 @@ const InternalLinks = styled.section`
       margin: 0 5px;
       font-weight: 400;
 
-      /* Selettore modificato: da div a a */
       a {
         position: relative;
         padding-left: 5px;
-        width: 135px;
+        width: ${(props) => (props.$small ? "100%" : "135px")};
         height: 60px;
         text-decoration: none;
         border: 1px solid #ccc;
         display: flex;
         align-items: center;
         text-align: left;
-        transform: rotate(-30deg) skew(25deg) translate(0, 0);
-        box-shadow: -20px 20px 10px var(--color-shadow);
+        transform:  ${(props) => (props.$small ? "" : "rotate(-30deg) skew(25deg) translate(0, 0)")};
+        box-shadow: ${(props) => (props.$small ? "" : "-20px 20px 10px var(--color-shadow)")};
         color: var(--color-text);
         transition: ease-in-out 0.3s;
       }
@@ -134,10 +137,10 @@ const InternalLinks = styled.section`
     content: "";
     position: absolute;
     height: 100%;
-    width: 20px;
+    width: ${(props) => (props.$small ? "8px" : "20px")};
     background: #b1b1b1;
-    top: 10px;
-    left: -20px;
+    top:  ${(props) => (props.$small ? "3px" : "10px")};
+    left: ${(props) => (props.$small ? "-8px" : "-20px")};
     transform: rotate(0deg) skewY(-45deg);
     background: var(--color-text);
     transition: ease-in-out 0.3s;
@@ -146,11 +149,11 @@ const InternalLinks = styled.section`
   a:after {
     content: "";
     position: absolute;
-    height: 20px;
+    height: ${(props) => (props.$small ? "6px" : "20px")};
     width: 100%;
     background: #b1b1b1;
-    bottom: -20px;
-    left: -10px;
+    bottom: ${(props) => (props.$small ? "-7px" : "20px")};
+    left: ${(props) => (props.$small ? "-5px" : "-10px")};
     transform: rotate(0deg) skewX(-45deg);
     background: var(--color-text);
     transition: ease-in-out 0.3s;
