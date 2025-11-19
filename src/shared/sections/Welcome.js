@@ -12,15 +12,15 @@ export default function Welcome() {
   return (
     <Container>
       {it.welcome.map((item, idx) => (
-        <section key={idx} className="welcome-section">
-          <h1>{item.benvenuto}</h1>
-          <h3>
-            {item.nome}, {item.specializzazione}
-          </h3>
-          <p>{item.descrizione}</p>
-        </section>
-      ))}
-      <ExternalLinks>
+        <>
+          <section key={idx} className="welcome-section">
+            <h1>{item.benvenuto}</h1>
+            <h3>
+              {item.nome}, {item.specializzazione}
+            </h3>
+            <p>{item.descrizione}</p>
+          </section>
+            <ExternalLinks>
         {Images.map((imageItem, idx) => (
           <a
             key={idx}
@@ -32,6 +32,19 @@ export default function Welcome() {
           </a>
         ))}
       </ExternalLinks>
+          <InternalLinks>
+            <ul>
+              <li>
+                <div>
+                   <span>{item.about}</span>
+                </div>
+               </li>
+              <li><div><span>{item.workplace}</span></div></li>
+              <li><div><span>{item.progetti}</span></div></li>
+            </ul>
+          </InternalLinks>
+        </>
+      ))}
     </Container>
   );
 }
@@ -61,6 +74,75 @@ const ExternalLinks = styled.section`
 
     &:hover {
       filter: brightness(1);
+    }
+  }
+`;
+
+const InternalLinks = styled.section`
+  ul {
+    display: flex;
+    gap: 60px;
+    padding: 0;
+    li {
+      list-style: none;
+      margin: 0 5px;
+      div{
+        padding-left: 5px;
+      width: 120px;
+      height: 60px;
+      text-decoration: none;
+      border: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      text-align: left;
+      transform: rotate(-30deg) skew(25deg) translate(0, 0);
+      /* box-shadow: -20px 20px 10px var(--color-shadow); */
+      color: var(--color-text);
+      transition: 0.5s;
+      }
+    }
+  }
+
+  div:before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 20px;
+    background: #b1b1b1;
+    top: 10px;
+    left: -20px;
+    transform: rotate(0deg) skewY(-45deg);
+    background: var(--color-text);
+  }
+
+  div:after {
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 100%;
+    background: #b1b1b1;
+    bottom: -20px;
+    left: -10px;
+    transform: rotate(0deg) skewX(-45deg);
+      background: var(--color-text);
+  }
+
+  div:hover {
+    transform: rotate(-30deg), skew(25deg) translate(20px -15px);
+    box-shadow: -50px 50px 50px var(--color-shadow);
+    
+
+    &:before{
+      content: '';
+ 
+      background: var(--color-hover-card);
+   
+    }
+
+    &:after{
+
+      background:var(--color-hover-card);
+
     }
   }
 `;

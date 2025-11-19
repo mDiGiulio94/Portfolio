@@ -46,6 +46,7 @@
   --color-tech-background: #ffd369;
     --color-span-hover:#2b2b2b;
   --color-text-span-hover:#ffd369;
+  --color-shadow:#ffd369
 }
 
 
@@ -63,6 +64,7 @@
   --color-hover-card: #e4e2de;
   --color-toggle-shadow: #0f172a26;
   --color-toggle-shadow-hover: #0f172a38;
+  --color-shadow: #00000080;
 }
 
 [data-theme="light"] {
