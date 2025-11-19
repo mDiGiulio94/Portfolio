@@ -24,12 +24,16 @@ export default function Home() {
     // 2. Imposta l'Intersection Observer.
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Aggiorna la sezione attiva quando interseca.
-            setActiveSection(entry.target.id);
-          }
-        });
+        const intersectingEntries = entries.filter((entry) => entry.isIntersecting);
+        if (intersectingEntries.length === 0) return;
+
+        // Seleziona la sezione con la maggiore porzione visibile per evitare che l'ultimo
+        // entry processato sovrascriva lo stato quando più sezioni sono contemporaneamente visibili.
+        const mostVisibleEntry = intersectingEntries.reduce((maxEntry, currentEntry) =>
+          currentEntry.intersectionRatio > maxEntry.intersectionRatio ? currentEntry : maxEntry
+        );
+
+        setActiveSection(mostVisibleEntry.target.id);
       },
       // Imposta una soglia inferiore per aggiornare più velocemente la sezione attiva.
       { threshold: 0.3 }
@@ -113,5 +117,4 @@ const ContainerRight = styled.div`
 `;
 
 const Section = styled.section`
-  scroll-margin-top: 100px;
 `;

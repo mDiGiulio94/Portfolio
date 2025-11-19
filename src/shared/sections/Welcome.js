@@ -71,8 +71,6 @@ export default function Welcome({ onNavigate = () => {}, activeSection }) {
   );
 }
 
-// STYLED COMPONENTS (modificati solo i selettori per usare <a> invece di <div>)
-
 const Container = styled.div`
   height: 100%;
   display: flex;
