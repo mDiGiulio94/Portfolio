@@ -9,8 +9,8 @@ import useMediaQuery from "../shared/hooks/hooks.js";
 export default function Home() {
   const isSmall = useMediaQuery("(max-width: 600px)");
 
-  // passare questa logica e css anche al componente della table, vedi se utilizzare tutti fare un contrext nel caso
-  const [isRightVisible, setIsRightVisible] = useState(false);
+  // Lo stato è impostato su true dopo il primo render per avviare la transizione CSS.
+  const [isContentVisible, setIsContentVisible] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
 
   const aboutRef = useRef(null);
@@ -18,25 +18,29 @@ export default function Home() {
   const projectsRef = useRef(null);
 
   useEffect(() => {
-    const timeout = window.requestAnimationFrame(() => setIsRightVisible(true));
+    // 1. Inizializza l'animazione dopo il mount.
+    setIsContentVisible(true);
 
+    // 2. Imposta l'Intersection Observer.
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            // Aggiorna la sezione attiva quando interseca.
             setActiveSection(entry.target.id);
           }
         });
       },
-      { threshold: 0.5 }
+      // Imposta una soglia inferiore per aggiornare più velocemente la sezione attiva.
+      { threshold: 0.3 }
     );
 
-    const sections = [aboutRef.current, workRef.current, projectsRef.current];
-    sections.filter(Boolean).forEach((section) => observer.observe(section));
+    // 3. Osserva le sezioni e filtra i ref nulli.
+    const sectionRefs = [aboutRef.current, workRef.current, projectsRef.current].filter(Boolean);
+    sectionRefs.forEach((section) => observer.observe(section));
 
+    // 4. Cleanup: Disconnette l'observer (invece di unobserve su ogni elemento).
     return () => {
-      window.cancelAnimationFrame(timeout);
-      sections.filter(Boolean).forEach((section) => observer.unobserve(section));
       observer.disconnect();
     };
   }, []);
@@ -49,16 +53,17 @@ export default function Home() {
     };
 
     const targetRef = refs[sectionId];
+    // Seleziona l'elemento e naviga
     targetRef?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
-    <Container $small={isSmall} $visible={isRightVisible}>
+    <Container $small={isSmall} $visible={isContentVisible}>
       <ContainerLeft $small={isSmall}>
         <Welcome onNavigate={handleNavigate} activeSection={activeSection} />
       </ContainerLeft>
 
-      <ContainerRight $small={isSmall} >
+      <ContainerRight $small={isSmall}>
         <Section id="about" ref={aboutRef}>
           <Presentazione />
         </Section>
@@ -79,16 +84,17 @@ const Container = styled.div`
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
-  gap: 16px;
+  gap: ${(props) => (props.$small ? "60px" : "16px")};
   align-items: flex-start;
-   opacity: ${(props) => (props.$visible ? 1 : 0)};
+  /* Utilizza il nuovo stato isContentVisible */
+  opacity: ${(props) => (props.$visible ? 1 : 0)};
   transform: translateY(${(props) => (props.$visible ? "0" : "12px")});
   transition: opacity 2s ease, transform 2s ease;
 
+  /* Rimuovi la barra di scorrimento su tutti i browser */
   ::-webkit-scrollbar {
     display: none;
   }
-
   -ms-overflow-style: none;
   scrollbar-width: none;
 `;
@@ -104,7 +110,6 @@ const ContainerRight = styled.div`
   flex-direction: column;
   gap: 50px;
   width: ${(props) => (props.$small ? "100%" : "50%")};
-
 `;
 
 const Section = styled.section`

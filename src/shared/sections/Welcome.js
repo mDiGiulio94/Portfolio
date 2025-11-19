@@ -1,21 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-import it from "../utils/it.json";
+import it from "../utils/it.json"; // Assumiamo che it.json contenga i dati
 
 import linkedin from "../images/icons/linkedin.svg";
 import github from "../images/icons/github.svg";
+
 export default function Welcome({ onNavigate = () => {}, activeSection }) {
+  // Aggiunti URL d'esempio (dovrai aggiornarli con i tuoi link reali)
   const Images = [
-    { img: linkedin, link: "", alt: "LinkedIn" },
-    { img: github, link: "", alt: "github" },
+    { img: linkedin, link: "https://www.linkedin.com/in/tuo-profilo", alt: "LinkedIn" },
+    { img: github, link: "https://github.com/tuo-profilo", alt: "GitHub" },
   ];
 
-  const handleKeyDown = (event, sectionId) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      onNavigate(sectionId);
-    }
-  };
+  // Rimosso handleKeyDown: il tag <a> gestisce l'interazione da tastiera (Enter/Space)
+  // nativamente quando ha un href.
 
   return (
     <Container>
@@ -40,8 +38,9 @@ export default function Welcome({ onNavigate = () => {}, activeSection }) {
                 <a
                   key={`welcome-link-${imageIdx}`}
                   target="_blank"
-                  href={imageItem.link}
+                  href={imageItem.link} // Assicurati che l'URL sia valido
                   rel="noopener noreferrer"
+                  aria-label={`Link esterno a ${imageItem.alt}`} // Accessibilità
                 >
                   <img src={imageItem.img} alt={imageItem.alt} loading="lazy" />
                 </a>
@@ -51,15 +50,16 @@ export default function Welcome({ onNavigate = () => {}, activeSection }) {
               <ul>
                 {navigationItems.map((navItem) => (
                   <li key={navItem.id}>
-                    <div
-                      role="button"
-                      tabIndex={0}
-                      onClick={() => onNavigate(navItem.id)}
-                      onKeyDown={(event) => handleKeyDown(event, navItem.id)}
+                    <a
+                      href={`#${navItem.id}`} 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onNavigate(navItem.id);
+                      }}
                       data-active={activeSection === navItem.id}
                     >
                       <span>{navItem.label}</span>
-                    </div>
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -70,6 +70,8 @@ export default function Welcome({ onNavigate = () => {}, activeSection }) {
     </Container>
   );
 }
+
+// STYLED COMPONENTS (modificati solo i selettori per usare <a> invece di <div>)
 
 const Container = styled.div`
   height: 100%;
@@ -106,11 +108,13 @@ const InternalLinks = styled.section`
     gap: 60px;
     padding: 0;
     li {
-      cursor:pointer;
+      cursor: pointer;
       list-style: none;
       margin: 0 5px;
       font-weight: 400;
-      div {
+
+      /* Selettore modificato: da div a a */
+      a {
         position: relative;
         padding-left: 5px;
         width: 135px;
@@ -128,7 +132,7 @@ const InternalLinks = styled.section`
     }
   }
 
-  div:before {
+  a:before {
     content: "";
     position: absolute;
     height: 100%;
@@ -141,7 +145,7 @@ const InternalLinks = styled.section`
     transition: ease-in-out 0.3s;
   }
 
-  div:after {
+  a:after {
     content: "";
     position: absolute;
     height: 20px;
@@ -154,16 +158,16 @@ const InternalLinks = styled.section`
     transition: ease-in-out 0.3s;
   }
 
-  div:hover,
-  div[data-active="true"] {
+  a:hover,
+  a[data-active="true"] {
     background: var(--color-text);
     color: var(--color-background);
   }
 
-  div:hover:before,
-  div[data-active="true"]:before,
-  div:hover:after,
-  div[data-active="true"]:after {
+  a:hover:before,
+  a[data-active="true"]:before,
+  a:hover:after,
+  a[data-active="true"]:after {
     background: var(--color-hover-card);
   }
 `;
