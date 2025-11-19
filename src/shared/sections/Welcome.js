@@ -123,6 +123,7 @@ const InternalLinks = styled.section`
         text-decoration: none;
         border: 1px solid #ccc;
         display: flex;
+        justify-content: center;
         align-items: center;
         text-align: left;
         transform:  ${(props) => (props.$small ? "" : "rotate(-30deg) skew(25deg) translate(0, 0)")};
@@ -152,7 +153,7 @@ const InternalLinks = styled.section`
     height: ${(props) => (props.$small ? "6px" : "20px")};
     width: 100%;
     background: #b1b1b1;
-    bottom: ${(props) => (props.$small ? "-7px" : "20px")};
+    bottom: ${(props) => (props.$small ? "-7px" : "-20px")};
     left: ${(props) => (props.$small ? "-5px" : "-10px")};
     transform: rotate(0deg) skewX(-45deg);
     background: var(--color-text);
