@@ -4,7 +4,7 @@ import it from "../utils/it.json";
 
 import linkedin from "../images/icons/linkedin.svg";
 import github from "../images/icons/github.svg";
-export default function Welcome({ onNavigate = () => {}, active }) {
+export default function Welcome({ onNavigate = () => {}, activeSection }) {
   const Images = [
     { img: linkedin, link: "", alt: "LinkedIn" },
     { img: github, link: "", alt: "github" },
@@ -56,7 +56,7 @@ export default function Welcome({ onNavigate = () => {}, active }) {
                       tabIndex={0}
                       onClick={() => onNavigate(navItem.id)}
                       onKeyDown={(event) => handleKeyDown(event, navItem.id)}
-                      data-active={active === navItem.id}
+                      data-active={activeSection === navItem.id}
                     >
                       <span>{navItem.label}</span>
                     </div>
