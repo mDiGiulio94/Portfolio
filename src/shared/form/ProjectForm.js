@@ -14,6 +14,7 @@ export default function ProjectForm() {
       name: "",
       workplace: "",
       date: "",
+      imageFile:"",
       description: "",
       tecnologies: [],
     },
@@ -31,6 +32,15 @@ export default function ProjectForm() {
   return (
     <>
       <Form noValidate>
+         <div className="col">
+          <label htmlFor="imageFile">Immagine del progetto</label>
+          <input
+            type="file"
+            id="imageFile"
+            accept="image/*"
+            {...register("imageFile")}
+          />
+        </div>
         <div className="col">
           <label htmlFor="name">Nome</label>
           <input
@@ -125,6 +135,7 @@ const Form = styled.form`
   .span-5 {
     grid-column: ${({ $small }) => ($small ? "span 2" : "span 4")};
   }
+  
 `;
 
 const ContainerBtn = styled.div`

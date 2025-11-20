@@ -1,4 +1,6 @@
 import axios from "axios";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { storage } from "../firebase/firebase.config";
 
 const BASE_URL = "https://portfolio-38468-default-rtdb.firebaseio.com/";
 const API_URL = `${BASE_URL}/projects.json`;
@@ -6,13 +8,23 @@ const API_URL = `${BASE_URL}/projects.json`;
 // Post dei progetti
 
 export const ProjectPost = async (project) => {
-  const { ...data } = project; // i file non devono arrivare qui
-  const payload = {
-    ...data,
-    createAt: new Date().toISOString(),
-  };
+  const { imageFile, imageUrl: providedImageUrl = "", ...data } = project;
+  const file = imageFile?.[0] ?? imageFile;
+  let imageUrl = providedImageUrl;
 
   try {
+    if (file) {
+      const storageRef = ref(storage, `projects/${Date.now()}-${file.name}`);
+      const snapshot = await uploadBytes(storageRef, file);
+      imageUrl = await getDownloadURL(snapshot.ref);
+    }
+
+    const payload = {
+      ...data,
+      ...(imageUrl && { imageUrl }),
+      createAt: new Date().toISOString(),
+    };
+
     const resp = await axios.post(API_URL, payload);
     return resp.data;
   } catch (error) {
