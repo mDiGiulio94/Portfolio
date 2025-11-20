@@ -12,10 +12,10 @@ export default function Welcome({ onNavigate = () => {}, activeSection }) {
   const Images = [
     {
       img: linkedin,
-      link: "https://www.linkedin.com/in/tuo-profilo",
+      link: "https://www.linkedin.com/in/marcodigiulio/",
       alt: "LinkedIn",
     },
-    { img: github, link: "https://github.com/tuo-profilo", alt: "GitHub" },
+    { img: github, link: "https://github.com/mDiGiulio94", alt: "GitHub" },
   ];
 
   return (
