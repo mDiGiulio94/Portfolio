@@ -14,7 +14,6 @@ export default function ProjectForm() {
       name: "",
       workplace: "",
       date: "",
-      imageFile:"",
       description: "",
       tecnologies: [],
     },
@@ -25,7 +24,7 @@ export default function ProjectForm() {
   };
 
   const onSubmit = async (data) => {
-  await  ProjectPost(data);
+    await ProjectPost(data);
     onReset();
   };
 

@@ -7,30 +7,33 @@ const API_URL = `${BASE_URL}/projects.json`;
 
 // Post dei progetti
 
+export const uploadProjectImage = async (file) => {
+  const storageRef = ref(storage, `projects/${Date.now()}-${file.name}`);
+  const snapshot = await uploadBytes(storageRef, file);
+
+  return getDownloadURL(snapshot.ref);
+};
+
 export const ProjectPost = async (project) => {
   const { imageFile, imageUrl: providedImageUrl = "", ...data } = project;
   const file = imageFile?.[0] ?? imageFile;
-  let imageUrl = providedImageUrl;
+
+  const imageUrl = file ? await uploadProjectImage(file) : providedImageUrl;
+
+  const payload = {
+    ...data,
+    ...(imageUrl && { imageUrl }),
+    createAt: new Date().toISOString(),
+  };
 
   try {
-    if (file) {
-      const storageRef = ref(storage, `projects/${Date.now()}-${file.name}`);
-      const snapshot = await uploadBytes(storageRef, file);
-      imageUrl = await getDownloadURL(snapshot.ref);
-    }
-
-    const payload = {
-      ...data,
-      ...(imageUrl && { imageUrl }),
-      createAt: new Date().toISOString(),
-    };
-
     const resp = await axios.post(API_URL, payload);
     return resp.data;
   } catch (error) {
     throw error.response?.data || { error: "Errore durante il caricamento" };
   }
 };
+
 
 // GET: tutti i progetti
 export const GetProgetti = async () => {
