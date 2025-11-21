@@ -5,11 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function AdminCode() {
   const navigate = useNavigate();
-  const SECRET_CODE = process.env.REACT_APP_SECRET_CODE || "";
-
-  if (!SECRET_CODE) {
-    console.error("REACT_APP_SECRET_CODE non è definito nelle env");
-  }
 
   const {
     register,
@@ -24,15 +19,14 @@ export default function AdminCode() {
       d4: "",
       d5: "",
       d6: "",
+      d7: "",
+      d8: "",
+      d9: "",
+      d10: "",
     },
   });
 
   const onSubmit = async (data) => {
-    if (!SECRET_CODE) {
-      alert("Configura la variabile REACT_APP_SECRET_CODE nel file .env");
-      return;
-    }
-
     // concateniamo i caratteri
     const enteredCode =
       (data.d1 || "") +
@@ -40,7 +34,11 @@ export default function AdminCode() {
       (data.d3 || "") +
       (data.d4 || "") +
       (data.d5 || "") +
-      (data.d6 || "");
+      (data.d6 || "") +
+      (data.d7 || "") +
+      (data.d8 || "") +
+      (data.d9 || "") +
+      (data.d10 || "");
 
     // legge il codice segreto dall'env (CRA)
     const SECRET_CODE = process.env.REACT_APP_SECRET_CODE;
@@ -50,7 +48,7 @@ export default function AdminCode() {
       return;
     }
 
-if (enteredCode === SECRET_CODE) {
+    if (enteredCode === SECRET_CODE) {
       // salviamo in localStorage sotto chiave "token"
       localStorage.setItem("token", enteredCode);
 
@@ -66,58 +64,65 @@ if (enteredCode === SECRET_CODE) {
 
   return (
     <>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <InputContainer>
           <input
             maxLength={1}
             inputMode="numeric"
-            disabled={!SECRET_CODE}
             {...register("d1", { required: true, maxLength: 1 })}
           />
           <input
             maxLength={1}
             inputMode="numeric"
-            disabled={!SECRET_CODE}
             {...register("d2", { required: true, maxLength: 1 })}
           />
           <input
             maxLength={1}
             inputMode="numeric"
-            disabled={!SECRET_CODE}
             {...register("d3", { required: true, maxLength: 1 })}
           />
           <input
             maxLength={1}
             inputMode="numeric"
-            disabled={!SECRET_CODE}
             {...register("d4", { required: true, maxLength: 1 })}
           />
           <input
             maxLength={1}
             inputMode="numeric"
-            disabled={!SECRET_CODE}
             {...register("d5", { required: true, maxLength: 1 })}
           />
           <input
             maxLength={1}
             inputMode="numeric"
-            disabled={!SECRET_CODE}
             {...register("d6", { required: true, maxLength: 1 })}
+          />
+           <input
+            maxLength={1}
+            inputMode="numeric"
+            {...register("d7", { required: true, maxLength: 1 })}
+          />
+           <input
+            maxLength={1}
+            inputMode="numeric"
+            {...register("d8", { required: true, maxLength: 1 })}
+          />
+           <input
+            maxLength={1}
+            inputMode="numeric"
+            {...register("d9", { required: true, maxLength: 1, })}
+          />
+           <input
+            maxLength={1}
+            inputMode="numeric"
+            {...register("d10", { required: true, maxLength: 1 })}
           />
         </InputContainer>
 
         <ContainerBtn>
-          <Button type="submit" disabled={isSubmitting || !SECRET_CODE}>
+          <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Invio..." : "Conferma"}
           </Button>
         </ContainerBtn>
-
-        {!SECRET_CODE ? (
-          <MissingEnv>
-            Imposta la variabile <code>REACT_APP_SECRET_CODE</code> nel file <code>.env</code>{" "}
-            e riavvia l'applicazione per abilitare il form.
-          </MissingEnv>
-        ) : null}
       </Form>
     </>
   );
@@ -129,7 +134,7 @@ const Form = styled.form`
   height: 150px;
   padding: 20px;
   margin: auto;
-  max-width: 500px;
+  max-width: 700px;
   align-items: center;
   justify-content: center;
   gap: 30px;
@@ -186,11 +191,4 @@ const Button = styled.button`
     opacity: 0.6;
     cursor: not-allowed;
   }
-`;
-
-const MissingEnv = styled.p`
-  margin: 0;
-  font-size: 14px;
-  color: #e53935;
-  text-align: center;
 `;

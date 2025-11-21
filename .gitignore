@@ -25,4 +25,4 @@ yarn-error.log*
 
 src/firebase/firebase.config.js
 
-src/env.local
+env.local

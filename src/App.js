@@ -48,7 +48,7 @@ function App() {
           {/* <Route path="/control-panel" element={<AdminConsole />} /> */}
           <Route path="/code-check" element={<AdminCode />} />
            <Route
-            path="/contol-panel"
+            path="/control-panel"
             element={
               <ProtectedRoute>
                 <AdminConsole />
