@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useState } from "react";
+import React, { Suspense, lazy} from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -45,7 +45,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<AllJobs />} />
-          {/* <Route path="/control-panel" element={<AdminConsole />} /> */}
           <Route path="/code-check" element={<AdminCode />} />
            <Route
             path="/control-panel"

@@ -68,7 +68,7 @@ const CardContainer = styled.div`
   padding: 20px;
   cursor: pointer;
   transition: 0.3s ease-in-out;
-  max-height: 250px;
+  min-height: 250px;
   height: fit-content;
   justify-content: center;
   opacity: 1;
@@ -115,7 +115,7 @@ const CardContainer = styled.div`
       gap: ${(props) => (props.$small ? "10px" : "60px")};
 
       > span:first-child {
-        width: 15%;
+        width: 20%;
       }
 
       > span:nth-of-type(2) {
@@ -136,6 +136,7 @@ const CardContainer = styled.div`
       gap: 10px;
       align-items: center;
       font-size: 16px;
+      flex-wrap: wrap;
 
       span {
         border-radius: 18px;

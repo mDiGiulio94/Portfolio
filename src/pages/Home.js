@@ -7,7 +7,7 @@ import Projects from "../shared/sections/Projects.js";
 import useMediaQuery from "../shared/hooks/hooks.js";
 
 export default function Home() {
-  const isSmall = useMediaQuery("(max-width: 600px)");
+  const isSmall = useMediaQuery("(max-width: 1200px)");
 
   // Lo stato è impostato su true dopo il primo render per avviare la transizione CSS.
   const [isContentVisible, setIsContentVisible] = useState(false);
