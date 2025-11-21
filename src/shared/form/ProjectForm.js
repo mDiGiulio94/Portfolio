@@ -2,8 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { ProjectPost } from "../../API/ProjectApi";
+import useMediaQuery from "../hooks/hooks";
 
 export default function ProjectForm() {
+  const isSmall = useMediaQuery("(max-width: 1350px)");
+
   const {
     register,
     handleSubmit,
@@ -30,8 +33,8 @@ export default function ProjectForm() {
 
   return (
     <>
-      <Form noValidate>
-         <div className="col">
+      <Form noValidate $small={isSmall}>
+        <div className="col">
           <label htmlFor="imageFile">Immagine del progetto</label>
           <input
             type="file"
@@ -127,14 +130,14 @@ export default function ProjectForm() {
 
 const Form = styled.form`
   display: grid;
-  grid-template-columns: ${({ $small }) =>
-    $small ? "repeat(2, minmax(0, 1fr))" : "repeat(4, minmax(0, 1fr))"};
+
+  grid-template-columns: ${(props) =>
+    props.$small ? "repeat(2, minmax(0, 1fr))" : "repeat(4, minmax(0, 1fr))"};
   gap: 15px;
 
   .span-5 {
-    grid-column: ${({ $small }) => ($small ? "span 2" : "span 4")};
+    grid-column: ${(props) => (props.$small ? "span 2" : "span 4")};
   }
-  
 `;
 
 const ContainerBtn = styled.div`

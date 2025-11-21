@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import useMediaQuery from "../hooks/hooks";
 
 export default function Card({
   titleCard,
@@ -16,8 +17,11 @@ export default function Card({
   onMouseLeave,
   isDimmed,
 }) {
+
+const isSmall = useMediaQuery("(max-width: 600px)");
+
   return (
-    <CardContainer
+    <CardContainer $small={isSmall}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
@@ -27,6 +31,11 @@ export default function Card({
         <div className="info-box">
           <span>
             <h5>{duration ?? ""}</h5>
+            {image && (
+              <div>
+                <img src={image} alt="test" />
+              </div>
+            )}
           </span>
           <span>
             <h5>
@@ -79,6 +88,11 @@ const CardContainer = styled.div`
     background: var(--color-span-hover);
   }
 
+  img{
+    height: 80px;
+    width: 140px;
+  }
+
   h2 {
     font-size: 30px;
     font-weight: 500;
@@ -97,6 +111,8 @@ const CardContainer = styled.div`
 
     .info-box {
       display: flex;
+      flex-direction: ${(props) => (props.$small ? "column" : "" )};
+      gap: ${(props) => (props.$small ? "10px" : "60px")};
 
       > span:first-child {
         width: 15%;

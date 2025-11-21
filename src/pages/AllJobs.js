@@ -5,9 +5,9 @@ import { GetProgetti } from "../API/ProjectApi";
 import useMediaQuery from "../shared/hooks/hooks";
 
 export default function AllJobs() {
-  const isNormal = useMediaQuery("max-width: 1200px");
-  const isSmall = useMediaQuery("max-width: 992px");
-  const isVerySmall=useMediaQuery("max-width: 768px");
+  const isNormal = useMediaQuery("(max-width: 1200px)");
+  const isSmall = useMediaQuery("(max-width: 1350px)");
+  const isVerySmall = useMediaQuery("(max-width: 768px)");
   const [visible, setVisible] = useState(false);
   const [progetti, setProgetti] = useState([]);
 

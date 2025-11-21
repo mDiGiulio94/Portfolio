@@ -27,6 +27,7 @@ export default function Projects() {
           id={idx}
           name={i.name}
           description={i.description}
+          image={i.imageUrl}
           items={progetti}
           tecnologies={i.tecnologies}
           isDimmed={hoverCard !== null && hoverCard !== idx}
@@ -63,6 +64,7 @@ const Navigator = styled.h5`
   color: var(--color-text);
   transition: ease-in-out 0.3s;
   box-shadow: -9px 9px 10px var(--color-shadow);
+  left: 28px;
 
   &:before {
     content: "";
