@@ -62,7 +62,7 @@ export default function AllJobs() {
       accessor: (progetti) =>
         progetti.tecnologies ? (
           <TechContainer>
-            {progetti.tecnologies.map((tech) => (
+            {progetti.tecnologies.map((tech) => ( 
               <span key={tech.trim()}>{tech.trim()}</span>
             ))}
           </TechContainer>
@@ -125,6 +125,7 @@ const Container = styled.div`
 
 const TechContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   align-items: center;
   font-size: 16px;
