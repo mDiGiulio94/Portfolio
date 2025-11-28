@@ -14,13 +14,11 @@ const AllJobs = lazy(() => import("./pages/AllJobs.js"));
 const AdminConsole = lazy(() => import("./pages/AdminConsole.js"));
 const AdminCode = lazy(() => import("./pages/AdminCode.js"));
 
-// inserire qui una rotta che conosco solo io protetta, questa rotta porterà ad una pagina di auth ma non collegata a firebase, l'accesso verrà permesso solo se si inseriscono le credenziali definite, o se riesco ad implemenatare una logica che generi un codice otp mandato via email vediamo
 const ProtectedRoute = ({ children }) => {
   const code = process.env.REACT_APP_SECRET_CODE;
   const accessCode = localStorage.getItem("token");
 
   if (!code) {
-    console.error("REACT_APP_SECRET_CODE non è definito nelle env");
     return <Navigate to="/code-check" replace />;
   }
 

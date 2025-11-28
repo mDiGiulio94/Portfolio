@@ -1,6 +1,22 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
+
+const ArrowUpIcon = (props) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M12 5v14" />
+    <path d="M5 12l7-7 7 7" />
+  </svg>
+);
+
 /** Hook: mostra il FAB quando hai scrollato oltre `threshold` */
 export function usePageHalfVisible(threshold = 0.5) {
   const [visible, setVisible] = useState(false);
@@ -46,7 +62,7 @@ export default function ScrollTop() {
       $visible={visible}
       onClick={handleScrollTop}
     >
-      ⮝
+       <ArrowUpIcon aria-hidden="true" focusable="false" />
     </Fab>
   );
 }
@@ -61,6 +77,11 @@ const Fab = styled.button`
 
   width: 48px;               
   height: 48px;
+
+  svg {
+    width: 30px;
+    height: 30px;
+  }
 
   background:var(--color-scroll-top);        
   color: var(--color-text);                
@@ -84,3 +105,4 @@ const Fab = styled.button`
     outline-offset: 2px;
   }
 `;
+

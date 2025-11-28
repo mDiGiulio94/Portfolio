@@ -3,12 +3,14 @@ import styled from "styled-components";
 import Card from "../components/Card";
 import { useNavigate } from "react-router-dom";
 import { GetProgetti } from "../../API/ProjectApi";
+import useMediaQuery from "../hooks/hooks";
 
 export default function Projects() {
   const navigate = useNavigate();
 
   const [hoverCard, setHoverCard] = useState(null);
   const [progetti, setProgetti] = useState([]);
+  const isHoverSupported = useMediaQuery("(hover: hover)");
 
   const fetcProjects = async () => {
     const res = await GetProgetti();
@@ -32,9 +34,15 @@ export default function Projects() {
           image={i.imageUrl}
           items={progetti}
           tecnologies={i.tecnologies}
-          isDimmed={hoverCard !== null && hoverCard !== idx}
-          onMouseEnter={() => setHoverCard(idx)}
-          onMouseLeave={() => setHoverCard(null)}
+               isDimmed={
+            isHoverSupported && hoverCard !== null && hoverCard !== idx
+          }
+          onMouseEnter={
+            isHoverSupported ? () => setHoverCard(idx) : undefined
+          }
+          onMouseLeave={
+            isHoverSupported ? () => setHoverCard(null) : undefined
+          }
         />
       ))}
       {progetti.length > 0 && (

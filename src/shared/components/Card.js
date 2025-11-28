@@ -77,15 +77,16 @@ const CardContainer = styled.div`
     opacity: 0.3;
   }
 
-  &:hover {
-    /* background: #1e293b; */
-    background: var(--color-hover-card);
-    box-shadow: inset 0 0 0 0 #94a3b8;
-  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background: var(--color-hover-card);
+      box-shadow: inset 0 0 0 0 #94a3b8;
+    }
 
-  &:hover .tech > span {
-    color: var(--color-text-span-hover);
-    background: var(--color-span-hover);
+    &:hover .tech > span {
+      color: var(--color-text-span-hover);
+      background: var(--color-span-hover);
+    }
   }
 
   img{

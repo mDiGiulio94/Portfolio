@@ -2,11 +2,15 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Card from "../components/Card";
 import { GetExperiences } from "../../API/Experience";
+import useMediaQuery from "../hooks/hooks";
+
 
 export default function Workplaces() {
   const [hoverCard, setHoverCard] = useState(null);
 
   const [experiences, setExperiences] = useState([]);
+    const isHoverSupported = useMediaQuery("(hover: hover)");
+
 
   const fetchExperienes = async () => {
     const res = await GetExperiences();
@@ -30,9 +34,15 @@ export default function Workplaces() {
           description={i.description}
           tecnologies={i.tecnologies}
           items={experiences}
-          isDimmed={hoverCard !== null && hoverCard !== idx}
-          onMouseEnter={() => setHoverCard(idx)}
-          onMouseLeave={() => setHoverCard(null)}
+         isDimmed={
+            isHoverSupported && hoverCard !== null && hoverCard !== idx
+          }
+          onMouseEnter={
+            isHoverSupported ? () => setHoverCard(idx) : undefined
+          }
+          onMouseLeave={
+            isHoverSupported ? () => setHoverCard(null) : undefined
+          }
         />
       ))}
     </Container>

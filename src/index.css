@@ -62,6 +62,7 @@
   --color-toggle-shadow: #0f172a26;
   --color-toggle-shadow-hover: #0f172a38;
   --color-shadow: #00000080;
+  --color-text-loader:#00000080;
 }
 
 [data-theme="light"] {

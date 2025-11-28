@@ -91,7 +91,10 @@ export default function AllJobs() {
   return (
     <Container $visible={visible} $small={isNormal}>
       <div className="presentation">
-        <span  onClick={() => navigate("/")}>🡠 Home</span>
+     <HomeLink type="button" onClick={() => navigate("/")}> 
+          <ArrowLeftIcon aria-hidden="true" focusable="false" />
+          <span>Home</span>
+        </HomeLink>
         <h1>Tutti i progetti</h1>
       </div>
       <Table columns={columns} items={progetti} />
@@ -144,3 +147,35 @@ const TechContainer = styled.div`
     font-weight: 400;
   }
 `;
+
+const HomeLink = styled.button`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+`;
+
+const ArrowLeftIcon = (props) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M19 12H5" />
+    <path d="M12 19l-7-7 7-7" />
+  </svg>
+);
