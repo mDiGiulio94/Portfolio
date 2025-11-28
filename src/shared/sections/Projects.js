@@ -15,13 +15,15 @@ export default function Projects() {
     setProgetti(res);
   };
 
+  const displayedProjects = progetti.slice(0, 3);
+
   useEffect(() => {
     fetcProjects();
   }, []);
 
   return (
     <Container>
-      {progetti.map((i, idx) => (
+      {displayedProjects.map((i, idx) => (
         <Card
           key={idx}
           id={idx}

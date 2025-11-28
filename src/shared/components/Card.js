@@ -33,7 +33,7 @@ const isSmall = useMediaQuery("(max-width: 600px)");
             <h5>{duration ?? ""}</h5>
             {image && (
               <div>
-                <img src={image} alt="test" />
+                <img src={image} alt=" " />
               </div>
             )}
           </span>
