@@ -123,7 +123,7 @@ const CardContainer = styled.div`
         gap: 15px;
         display: flex;
         flex-direction: column;
-        width: 75%;
+        width:  ${(props) => (props.$small ? "100%" : "75%")};
 
         p {
           box-sizing: border-box;

@@ -97,7 +97,7 @@ const Fab = styled.button`
 
   opacity: ${(p) => (p.$visible ? 1 : 0)};             
   pointer-events: ${(p) => (p.$visible ? "auto" : "none")};
-  transition: opacity 300ms ease;                     
+   transition: opacity 300ms ease;                    
   cursor: ${(p) => (p.$visible ? "pointer" : "default")};
 
   &:focus-visible {
