@@ -27,9 +27,8 @@
 
   --lh-h: 1.2;
 
-
   /* colori tema scuro (default) */
-  --color-background:  #2b2b33;
+  --color-background: #2b2b33;
   --color-scroll-top: #2b2b2b;
   --color-hover-card: #1b1b1b;
   --color-text: #ffd369;
@@ -41,19 +40,18 @@
   --color-text-tech: #ffd369;
   --color-text-tech-hover: #1b1b1b;
   --color-tech-background: #ffd369;
-    --color-span-hover:#2b2b2b;
-  --color-text-span-hover:#ffd369;
-  --color-shadow:#ffd369
+  --color-span-hover: #2b2b2b;
+  --color-text-span-hover: #ffd369;
+  --color-shadow: #ffd369;
 }
-
 
 [data-theme="light"] {
   color-scheme: light;
   --color-background: #ffff;
-   --color-scroll-top: #e4e2de;
-  --color-span-hover:#ffff;
+  --color-scroll-top: #e4e2de;
+  --color-span-hover: #ffff;
   --color-text-span-hover: #000;
-   --color-text: #000;
+  --color-text: #000;
   --color-surface: #ffffffe6;
   --color-border: #94a3b873;
   --color-toggle-bg: #ffffffe6;
@@ -62,42 +60,47 @@
   --color-toggle-shadow: #0f172a26;
   --color-toggle-shadow-hover: #0f172a38;
   --color-shadow: #00000080;
-  --color-text-loader:#00000080;
+  --color-text-loader: #00000080;
 }
 
 [data-theme="light"] {
   color-scheme: light;
 }
 
-
-
 h1 {
   font-size: var(--fs-h1);
   line-height: var(--lh-h);
+  text-shadow: 0 0 black;
 }
 h2 {
   font-size: var(--fs-h2);
   line-height: var(--lh-h);
+  text-shadow: 0 0 black;
 }
 h3 {
   font-size: var(--fs-h3);
   line-height: var(--lh-h);
+  text-shadow: 0 0 black;
 }
 h4 {
   font-size: var(--fs-h4);
   line-height: var(--lh-h);
+  text-shadow: 0 0 black;
 }
 h5 {
   font-size: var(--fs-h5);
   line-height: var(--lh-h);
+  text-shadow: 0 0 black;
 }
 h6 {
   font-size: var(--fs-h6);
   line-height: var(--lh-h);
+  text-shadow: 0 0 black;
 }
 p {
   font-size: var(--fs-h6);
   line-height: var(--lh-h);
+  text-shadow: 0 0 black;
 }
 .small,
 small {
@@ -179,80 +182,76 @@ html {
 /* Css degli input */
 
 .col {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  }
-  
-
-  /* Input & textarea */
-  .col input,
-  .col textarea,
-  .col select {
-    padding: 14px 12px 10px; /* spazio per la label “floating” */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font: inherit;
-    background: #fff;
-    color: var(--color-text);
-    outline: none;
-    transition: border-color 0.2s ease;
-   
-  }
-
-  .col textarea {
-    min-height: 120px;
-    resize: vertical;
-     resize: none;
-  }
-
-  .col input:focus,
-  .col textarea:focus {
-    border-color: #0b1e33;
-  }
-
-  /* Label “floating” */
-  .col label {
-    position: absolute;
-    left: 12px;
-    top: 17px;
-    font-weight: 500;
-    padding: 0 4px;
-    background: #fff; /* copre il bordo quando sale */
-    color: var(--color-text);
-    transform: translateY(0);
-    font-size: 14px;
-    line-height: 1;
-    pointer-events: none; /* click passa all’input */
-    transition: transform 0.2s ease, color 0.2s ease, font-size 0.2s ease;
-
-  }
-
-  /* 1) Quando il campo è in focus → label sale */
-  .col:focus-within label {
-    transform: translateY(-23px);
-    font-size: 14px;
-    color: var(--color-text);
-  }
-
-  .col:has([data-select-has-value="true"]) label {
-  transform: translateY(-23px);
-  font-size: 14px;
-    color: var(--color-text);
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Input & textarea */
+.col input,
+.col textarea,
+.col select {
+  padding: 14px 12px 10px; /* spazio per la label “floating” */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font: inherit;
+  background: #fff;
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
 
-  /* 2) Quando il campo NON è vuoto → label resta su
+.col textarea {
+  min-height: 120px;
+  resize: vertical;
+  resize: none;
+}
+
+.col input:focus,
+.col textarea:focus {
+  border-color: #0b1e33;
+}
+
+/* Label “floating” */
+.col label {
+  position: absolute;
+  left: 12px;
+  top: 17px;
+  font-weight: 500;
+  padding: 0 4px;
+  background: #fff; /* copre il bordo quando sale */
+  color: var(--color-text);
+  transform: translateY(0);
+  font-size: 14px;
+  line-height: 1;
+  pointer-events: none; /* click passa all’input */
+  transition: transform 0.2s ease, color 0.2s ease, font-size 0.2s ease;
+}
+
+/* 1) Quando il campo è in focus → label sale */
+.col:focus-within label {
+  transform: translateY(-23px);
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+.col:has([data-select-has-value="true"]) label {
+  transform: translateY(-23px);
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+/* 2) Quando il campo NON è vuoto → label resta su
      (richiede placeholder=" " sull’input/textarea) */
-  .col:has(input:not(:placeholder-shown)) label,
-  .col:has(textarea:not(:placeholder-shown)) label {
-    transform: translateY(-23px);
-    font-size: 14px;
-    color: var(--color-text);
-  }
+.col:has(input:not(:placeholder-shown)) label,
+.col:has(textarea:not(:placeholder-shown)) label {
+  transform: translateY(-23px);
+  font-size: 14px;
+  color: var(--color-text);
+}
 
 /* questo serve a nascondere le frecce di default per gli input number */
- input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
@@ -261,7 +260,7 @@ input[type="number"]::-webkit-inner-spin-button {
 /* Firefox */
 .input[type="number"] {
   -moz-appearance: textfield; /* necessario per Firefox */
-  appearance: textfield;      /* standard */
+  appearance: textfield; /* standard */
 }
 
 /* fine css degli input */
