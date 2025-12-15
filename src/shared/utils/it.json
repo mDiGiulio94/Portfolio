@@ -23,5 +23,17 @@
         "esperienze": "Gestione esperienze",
         "progetti": "Gestione progetti"
     }
-   ]
+   ],
+
+    "itemForm": [
+    {
+      "title": "Contatta",
+      "firstName2": "Nome",
+      "email": "Email*",
+      "indirizzo": "Indirizzo",
+      "emailAddress": "AriMariq85@gmail.com",
+      "message": "Messaggio",
+      "phone": "Telefono"
+    }
+  ]
 }
