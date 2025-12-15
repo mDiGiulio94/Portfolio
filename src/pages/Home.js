@@ -116,7 +116,7 @@ const Container = styled.div`
   align-items: flex-start;
   /* Utilizza il nuovo stato isContentVisible */
   opacity: ${(props) => (props.$visible ? 1 : 0)};
-  transform: translateY(${(props) => (props.$visible ? "0" : "12px")});
+  transform: translateY(${(props) => (props.$visible ? "none" : "12px")});
   transition: opacity 2s ease, transform 2s ease;
 
   /* Rimuovi la barra di scorrimento su tutti i browser */

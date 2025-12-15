@@ -28,7 +28,8 @@
     "itemForm": [
     {
       "title": "Contatta",
-      "firstName2": "Nome",
+      "firstName": "Nome",
+      "lastName": "Cognome",
       "email": "Email*",
       "indirizzo": "Indirizzo",
       "emailAddress": "AriMariq85@gmail.com",

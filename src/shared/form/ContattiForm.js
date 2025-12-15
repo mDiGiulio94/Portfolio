@@ -4,9 +4,9 @@ import styled from "styled-components";
 import text from "../utils/it.json";
 //import Api
 import sendMail from "../../API/SendEmail";
+import X from "../images/icons/Xchiusura.svg";
 
-export default function ContattiForm() {
-
+export default function ContattiForm({ onClose }) {
   //Campi del form
   const [formData, setFormData] = useState({
     nome: "",
@@ -45,7 +45,7 @@ export default function ContattiForm() {
       return;
     }
     sendMail(formData);
-    setTouched(false)
+    setTouched(false);
     setTimeout(() => {
       setFormData({
         nome: "",
@@ -57,71 +57,71 @@ export default function ContattiForm() {
   };
   return (
     <>
-        <FormContatti>
-          {text.itemForm.map((item, index) => (
-            <>
+      <FormContatti>
+        {text.itemForm.map((item, index) => (
+          <>
+            <form className="formContact" onSubmit={onSubmit}>
               <section key={index} className="title">
                 <span>{item.title}</span>
-                <p>{item.contacts}</p>
+                <img onClick={onClose} loading="lazy" src={X} alt="" />
               </section>
-              <form className="formContact" onSubmit={onSubmit}>
-                <div className="row">
-                  <div className="col">
-                    <label>{item.firstName}</label>
-                    <input
-                      type="text"
-                      name="nome"
-                      value={formData.nome}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="col">
-                    <label>{item.lastName}</label>
-                    <input
-                      type="text"
-                      name="cognome"
-                      value={formData.cognome}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-                <div className="secondRow">
-                  <div className="col">
-                    <label>{item.email}</label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      required
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      autoComplete="off"
-                      className={
-                        touched.email &&
-                        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
-                          ? "invalid"
-                          : ""
-                      }
-                    />
-                  </div>
-                  <div className="col">
-                    <label>{item.message}</label>
-                    <textarea
-                      name="messaggio"
-                      value={formData.messaggio}
-                      onChange={handleChange}
-                    ></textarea>
-                  </div>
+              <div className="row">
+                <div className="col">
+                  <label>{item.firstName}</label>
+                  <input
+                    type="text"
+                    name="nome"
+                    value={formData.nome}
+                    onChange={handleChange}
+                  />
                 </div>
 
-                <div className="btn-container">
-                  <button type="submit">INVIA</button>
+                <div className="col">
+                  <label>{item.lastName}</label>
+                  <input
+                    type="text"
+                    name="cognome"
+                    value={formData.cognome}
+                    onChange={handleChange}
+                  />
                 </div>
-              </form>
-            </>
-          ))}
-        </FormContatti>   
+              </div>
+              <div className="secondRow">
+                <div className="col">
+                  <label>{item.email}</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    required
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    autoComplete="off"
+                    className={
+                      touched.email &&
+                      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
+                        ? "invalid"
+                        : ""
+                    }
+                  />
+                </div>
+                <div className="col">
+                  <label>{item.message}</label>
+                  <textarea
+                    name="messaggio"
+                    value={formData.messaggio}
+                    onChange={handleChange}
+                  ></textarea>
+                </div>
+              </div>
+
+              <div className="btn-container">
+                <button type="submit">INVIA</button>
+              </div>
+            </form>
+          </>
+        ))}
+      </FormContatti>
     </>
   );
 }
@@ -132,23 +132,23 @@ const FormContatti = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin-top: 50px;
 
   .title {
     display: flex;
-    flex-direction: column;
     align-items: center;
     gap: 15px;
+    width: 100%;
+    justify-content: space-between;
 
     span {
       font-size: 30px;
       font-weight: 500;
       color: #2e4942;
     }
-    p {
-      font-size: 20px;
-      font-weight: 400;
-      word-spacing: 10px;
+    img {
+      cursor: pointer;
+      border: none;
+      filter: invert(1);
     }
   }
 
@@ -158,7 +158,6 @@ const FormContatti = styled.div`
     gap: 40px;
     width: 100%;
     max-width: 650px;
-    margin-top: 100px;
 
     .row {
       display: flex;
@@ -285,5 +284,3 @@ const FormContatti = styled.div`
     }
   }
 `;
-
-
