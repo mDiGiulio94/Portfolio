@@ -59,67 +59,65 @@ export default function ContattiForm({ onClose }) {
     <>
       <FormContatti>
         {text.itemForm.map((item, index) => (
-          <>
-            <form className="formContact" onSubmit={onSubmit}>
-              <section key={index} className="title">
-                <span>{item.title}</span>
-                <img onClick={onClose} loading="lazy" src={X} alt="" />
-              </section>
-              <div className="row">
-                <div className="col">
-                  <label>{item.firstName}</label>
-                  <input
-                    type="text"
-                    name="nome"
-                    value={formData.nome}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="col">
-                  <label>{item.lastName}</label>
-                  <input
-                    type="text"
-                    name="cognome"
-                    value={formData.cognome}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-              <div className="secondRow">
-                <div className="col">
-                  <label>{item.email}</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    required
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    autoComplete="off"
-                    className={
-                      touched.email &&
-                      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
-                        ? "invalid"
-                        : ""
-                    }
-                  />
-                </div>
-                <div className="col">
-                  <label>{item.message}</label>
-                  <textarea
-                    name="messaggio"
-                    value={formData.messaggio}
-                    onChange={handleChange}
-                  ></textarea>
-                </div>
+          <form key={index} className="formContact" onSubmit={onSubmit}>
+            <section className="title">
+              <span>{item.title}</span>
+              <XIcon width={24} height={24} aria-hidden="true" focusable="false" onClick={onClose}/>
+            </section>
+            <div className="row">
+              <div className="col">
+                <label>{item.firstName}</label>
+                <input
+                  type="text"
+                  name="nome"
+                  value={formData.nome}
+                  onChange={handleChange}
+                />
               </div>
 
-              <div className="btn-container">
-                <button type="submit">INVIA</button>
+              <div className="col">
+                <label>{item.lastName}</label>
+                <input
+                  type="text"
+                  name="cognome"
+                  value={formData.cognome}
+                  onChange={handleChange}
+                />
               </div>
-            </form>
-          </>
+            </div>
+            <div className="secondRow">
+              <div className="col">
+                <label>{item.email}</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  required
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  autoComplete="off"
+                  className={
+                    touched.email &&
+                    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
+                      ? "invalid"
+                      : ""
+                  }
+                />
+              </div>
+              <div className="col">
+                <label>{item.message}</label>
+                <textarea
+                  name="messaggio"
+                  value={formData.messaggio}
+                  onChange={handleChange}
+                ></textarea>
+              </div>
+            </div>
+
+            <div className="btn-container">
+              <button type="submit">INVIA</button>
+            </div>
+          </form>
         ))}
       </FormContatti>
     </>
@@ -132,6 +130,7 @@ const FormContatti = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  color: var(--color-text);
 
   .title {
     display: flex;
@@ -143,12 +142,12 @@ const FormContatti = styled.div`
     span {
       font-size: 30px;
       font-weight: 500;
-      color: #2e4942;
+      color: var(--color-text);
     }
     img {
       cursor: pointer;
       border: none;
-      filter: invert(1);
+      filter: brightness(0) invert(1);
     }
   }
 
@@ -158,6 +157,11 @@ const FormContatti = styled.div`
     gap: 40px;
     width: 100%;
     max-width: 650px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 
     .row {
       display: flex;
@@ -169,27 +173,33 @@ const FormContatti = styled.div`
         gap: 10px;
 
         label {
-          color: #b87e58;
+          color: var(--color-text);
           font-size: 15px;
           font-weight: 300;
+          background: transparent;
+          transform: translateY(-40px) !important;
+          padding: 0;
+          margin-left: -10px;
         }
 
         input {
-          border: none;
-          border-bottom: 1px solid #000000;
+          border: 1px solid var(--color-border);
           outline: none;
-          background: transparent;
-          height: 23px;
+          background: var(--color-hover-card);
+          color: var(--color-text);
+          height: 15px;
           font-size: 16px;
-          padding: 3px 3px 4px 0;
+          padding: 10px 14px;
+          border-radius: 10px;
+          transition: border-color 0.2s ease, box-shadow 0.2s ease,
+            background 0.2s ease;
         }
         input:focus {
-          border-bottom: 2px solid #000000;
-          padding-bottom: 3px;
+          border-color: var(--color-text);
+          box-shadow: 0 0 0 2px rgba(255, 211, 105, 0.25);
         }
         input:hover {
-          border-bottom: 2px solid #000000;
-          padding-bottom: 3px;
+          border-color: var(--color-text);
         }
       }
     }
@@ -204,53 +214,61 @@ const FormContatti = styled.div`
         flex-direction: column;
         gap: 10px;
         label {
-          color: #b87e58;
+          color: var(--color-text);
           font-size: 15px;
           font-weight: 300;
+          background: transparent;
+          transform: translateY(-40px) !important;
+          padding: 0;
+          margin-left: -10px;
         }
 
         input[type="email"] {
-          border: none;
-          border-bottom: 1px solid #000000;
+          border: 1px solid var(--color-border);
           outline: none;
-          background: transparent;
-          height: 23px;
+          background: var(--color-hover-card);
+          color: var(--color-text);
+          height: 15px;
           font-size: 16px;
-          padding: 3px 3px 4px 0;
+          padding: 10px 14px;
+          border-radius: 10px;
+          transition: border-color 0.2s ease, box-shadow 0.2s ease,
+            background 0.2s ease;
 
           &:focus {
-            border-bottom: 2px solid #000000;
-            padding-bottom: 3px;
+            border-color: var(--color-text);
+            box-shadow: 0 0 0 2px rgba(255, 211, 105, 0.25);
           }
 
           &:hover {
-            border-bottom: 2px solid #000000;
-            padding-bottom: 3px;
+            border-color: var(--color-text);
           }
         }
         input[type="email"].invalid {
-          border-bottom: 2px solid red;
-          padding-bottom: 3px;
+          border: 1px solid #ff6b6b;
+          box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.15);
         }
 
         textarea {
-          border: none;
-          border-bottom: 1px solid #000000;
+          border: 1px solid var(--color-border);
           outline: none;
           resize: none;
-          background: transparent;
-          height: 50px;
+          background: var(--color-hover-card);
+          color: var(--color-text);
+          height: 120px;
           font-size: 16px;
-          padding: 3px 3px 4px 0;
+          padding: 12px 14px;
+          border-radius: 10px;
+          transition: border-color 0.2s ease, box-shadow 0.2s ease,
+            background 0.2s ease;
         }
 
         textarea:focus {
-          border-bottom: 2px solid #000000;
-          padding-bottom: 3px;
+          border-color: var(--color-text);
+          box-shadow: 0 0 0 2px rgba(255, 211, 105, 0.25);
         }
         textarea:hover {
-          border-bottom: 2px solid #000000;
-          padding-bottom: 3px;
+          border-color: var(--color-text);
         }
       }
     }
@@ -264,23 +282,43 @@ const FormContatti = styled.div`
     margin-top: 0 !important;
 
     button {
-      padding: 10px 20px;
+      padding: 14px 20px;
       margin-top: 15px;
-      background-color: transparent;
-      color: #b87e58;
-      border: 1px solid #b87e58 !important;
+      background-color: var(--color-text);
+      color: var(--color-span-hover);
+      border: 1px solid var(--color-text) !important;
       font-size: 15px;
       width: 100%;
       max-width: 300px;
       height: 100%;
-      min-height: 60px;
-      transition: ease-in-out 0.4s;
+      min-height: 56px;
+      transition: ease-in-out 0.3s;
       font-family: "Montserrat", sans-serif;
+      border-radius: 12px;
+      letter-spacing: 1px;
+      font-weight: 600;
     }
 
     button:hover {
-      color: #ffffff;
-      background-color: #b87e58;
+      color: var(--color-text);
+      background-color: transparent;
+      box-shadow: 0 0 0 2px rgba(255, 211, 105, 0.35);
     }
   }
 `;
+
+const XIcon = (props) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+    cursor="pointer"
+  >
+    <path d="M6 6l12 12" />
+    <path d="M18 6l-12 12" />
+  </svg>
+);

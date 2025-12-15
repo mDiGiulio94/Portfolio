@@ -1,7 +1,6 @@
 import React from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
-import X from "../images/icons/Xchiusura.svg";
 import ContattiForm from "../form/ContattiForm";
 
 
@@ -34,9 +33,9 @@ const Overlay = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  background: white;
+  color: var(--color-text);
   padding: 50px 80px;
-  border-radius: 8px;
+  border-radius: 16px;
   position: relative;
   overflow: auto;
 
