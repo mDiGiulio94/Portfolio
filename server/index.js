@@ -4,13 +4,7 @@ const express = require("express");
 const cors = require("cors");
 //plug-in per abilitare le email
 const nodemailer = require("nodemailer");
-//rotta per la registrazione
-const registerRoute = require("./register");
-//rotta dei preferiti
-const agentOtp = require("./otp")
-//password criptata per la chiave google per o reCAPTCHA
-//rotta preferiti
-const preferiti = require("./preferiti");
+
 require("dotenv").config();
 
 const app = express();
@@ -19,30 +13,67 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:3000" }));
 
-// Route registrazione
-app.use("/api/register", registerRoute);
-app.use("/api/agent-otp", agentOtp);
-app.use("/api/preferiti", preferiti)
+const {
+  EMAIL_FROM_USER,
+  EMAIL_FROM_PASS,
+  EMAIL_TO,
+  CLIENT_URL
+} = process.env;
 
+const allowedOrigin = CLIENT_URL || "http://localhost:3000";
+app.use(cors({ origin: allowedOrigin }));
 
+const missingEnv = ["EMAIL_FROM_USER", "EMAIL_FROM_PASS", "EMAIL_TO"].filter(
+  (envVar) => !process.env[envVar]
+);
 
-// Route invio email
+if (missingEnv.length) {
+  console.warn(
+    `⚠️ Variabili d'ambiente mancanti per il server email: ${missingEnv.join(", ")}`
+  );
+}
+
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "m.dig994@gmail.com",
-    pass: "tlgxvwsoucfspowm" // 🔐 meglio usare variabile .env
+    user: EMAIL_FROM_USER,
+    pass: EMAIL_FROM_PASS
   }
 });
+
+// Verifica configurazione transporter all'avvio
+transporter.verify((error) => {
+  if (error) {
+    console.error("Errore di configurazione SMTP:", error.message);
+  } else {
+    console.log("📧 Connessione SMTP pronta per l'invio");
+  }
+});
+
+// Route invio email
 
 app.post("/api/send-email", async (req, res) => {
   const { nome, cognome, email, messaggio } = req.body;
 
+  if (!nome || !cognome || !email || !messaggio) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Tutti i campi sono obbligatori." });
+  }
+
+  if (!EMAIL_FROM_USER || !EMAIL_FROM_PASS || !EMAIL_TO) {
+    return res.status(503).json({
+      success: false,
+      message:
+        "Server email non configurato correttamente. Controlla le variabili d'ambiente."
+    });
+  }
+
   const mailOptions = {
-    from: email,
-    to: "m.dig994@gmail.com",
+    from: EMAIL_FROM_USER,
+    replyTo: email,
+    to: EMAIL_TO,
     subject: "Nuovo messaggio dal form contatti",
     html: `
       <h3>Hai ricevuto un nuovo messaggio!</h3>
