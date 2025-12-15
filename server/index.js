@@ -5,7 +5,7 @@ const cors = require("cors");
 //plug-in per abilitare le email
 const nodemailer = require("nodemailer");
 
-require("dotenv").config();
+require('dotenv').config({ override: true }); 
 
 const app = express();
 //set della porta
@@ -21,7 +21,10 @@ const {
   CLIENT_URL
 } = process.env;
 
-const allowedOrigin = CLIENT_URL || "http://localhost:3000";
+console.log("EmailFrom", EMAIL_FROM_USER)
+console.log("EmailFromPAss", EMAIL_FROM_PASS.length)
+
+const allowedOrigin = CLIENT_URL || "http://localhost:4000";
 app.use(cors({ origin: allowedOrigin }));
 
 const missingEnv = ["EMAIL_FROM_USER", "EMAIL_FROM_PASS", "EMAIL_TO"].filter(
@@ -37,8 +40,8 @@ if (missingEnv.length) {
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: EMAIL_FROM_USER,
-    pass: EMAIL_FROM_PASS
+  user: EMAIL_FROM_USER?.trim(),
+  pass: EMAIL_FROM_PASS?.trim()
   }
 });
 
