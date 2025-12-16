@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+const nodemailer = require("nodemailer");
 
 const REQUIRED_ENV = ["EMAIL_FROM_USER", "EMAIL_FROM_PASS", "EMAIL_TO"];
 
@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
   if (req.method !== "POST") {
     return res
       .status(405)
@@ -59,4 +59,4 @@ export default async function handler(req, res) {
       message: "Errore durante l'invio dell'email."
     });
   }
-}
+};

@@ -26,6 +26,7 @@ export default function Workplaces() {
     <Container>
       {experiences.map((i, idx) => (
         <Card
+          key={idx}
           id={idx}
           name={i.workplace}
           role={i.role}
