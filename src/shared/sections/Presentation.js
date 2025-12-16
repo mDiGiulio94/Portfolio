@@ -20,7 +20,7 @@ export default function Presentation() {
             <p>{item.spareTime}</p>
           </section>
         ))}
-        <Navigator onClick={toggleModal}>Contatta</Navigator>
+        {/* <Navigator onClick={toggleModal}>Contatta</Navigator> */}
       </Container>
       {showModal && <Modal onClose={toggleModal} />}
     </>

@@ -1,35 +1,21 @@
-//qui è l'index.js dove viene generato avviato il server
 const express = require("express");
-//impedisce errori di cors
 const cors = require("cors");
-//plug-in per abilitare le email
 const nodemailer = require("nodemailer");
-
-require('dotenv').config({ override: true }); 
+require("dotenv").config();
 
 const app = express();
-//set della porta
 const PORT = process.env.PORT || 5000;
 
-// Middleware
 app.use(express.json());
 
-const {
-  EMAIL_FROM_USER,
-  EMAIL_FROM_PASS,
-  EMAIL_TO,
-  CLIENT_URL
-} = process.env;
-
-console.log("EmailFrom", EMAIL_FROM_USER)
-console.log("EmailFromPAss", EMAIL_FROM_PASS.length)
+const { EMAIL_USER, EMAIL_PASS, EMAIL_TO, CLIENT_URL } = process.env;
 
 const allowedOrigin = CLIENT_URL || "http://localhost:4000";
 app.use(cors({ origin: allowedOrigin }));
 
-const missingEnv = ["EMAIL_FROM_USER", "EMAIL_FROM_PASS", "EMAIL_TO"].filter(
-  (envVar) => !process.env[envVar]
-);
+// ✅ Controllo corretto delle env (usa i NOMI delle variabili)
+const requiredEnv = ["EMAIL_USER", "EMAIL_PASS", "EMAIL_TO"];
+const missingEnv = requiredEnv.filter((k) => !process.env[k]);
 
 if (missingEnv.length) {
   console.warn(
@@ -40,21 +26,15 @@ if (missingEnv.length) {
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-  user: EMAIL_FROM_USER?.trim(),
-  pass: EMAIL_FROM_PASS?.trim()
+    user: EMAIL_USER,
+    pass: EMAIL_PASS
   }
 });
 
-// Verifica configurazione transporter all'avvio
 transporter.verify((error) => {
-  if (error) {
-    console.error("Errore di configurazione SMTP:", error.message);
-  } else {
-    console.log("📧 Connessione SMTP pronta per l'invio");
-  }
+  if (error) console.error("Errore di configurazione SMTP:", error.message);
+  else console.log("📧 Connessione SMTP pronta per l'invio");
 });
-
-// Route invio email
 
 app.post("/api/send-email", async (req, res) => {
   const { nome, cognome, email, messaggio } = req.body;
@@ -65,7 +45,8 @@ app.post("/api/send-email", async (req, res) => {
       .json({ success: false, message: "Tutti i campi sono obbligatori." });
   }
 
-  if (!EMAIL_FROM_USER || !EMAIL_FROM_PASS || !EMAIL_TO) {
+  // ✅ Se mancano env, evita di provare a mandare email
+  if (missingEnv.length) {
     return res.status(503).json({
       success: false,
       message:
@@ -74,7 +55,7 @@ app.post("/api/send-email", async (req, res) => {
   }
 
   const mailOptions = {
-    from: EMAIL_FROM_USER,
+    from: EMAIL_USER,
     replyTo: email,
     to: EMAIL_TO,
     subject: "Nuovo messaggio dal form contatti",
@@ -88,14 +69,17 @@ app.post("/api/send-email", async (req, res) => {
 
   try {
     await transporter.sendMail(mailOptions);
-    return res.status(200).json({ success: true, message: "Email inviata con successo!" });
+    return res
+      .status(200)
+      .json({ success: true, message: "Email inviata con successo!" });
   } catch (error) {
     console.error("Errore invio email:", error);
-    return res.status(500).json({ success: false, message: "Errore durante l'invio dell'email." });
+    return res
+      .status(500)
+      .json({ success: false, message: "Errore durante l'invio dell'email." });
   }
 });
 
-// Avvia server
 app.listen(PORT, () => {
   console.log(`✅ Server attivo su http://localhost:${PORT}`);
 });
