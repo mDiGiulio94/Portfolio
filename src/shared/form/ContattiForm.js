@@ -4,7 +4,6 @@ import styled from "styled-components";
 import text from "../utils/it.json";
 //import Api
 import sendMail from "../../API/SendEmail";
-import X from "../images/icons/Xchiusura.svg";
 
 export default function ContattiForm({ onClose }) {
   //Campi del form
