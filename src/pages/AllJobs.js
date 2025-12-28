@@ -22,7 +22,7 @@ export default function AllJobs() {
 
   const fetchProjects = async () => {
     const res = await GetProgetti();
-    setProgetti(res);
+    setProgetti(res.sort((a, b) => b.date - a.date));
   };
 
   useEffect(() => {
