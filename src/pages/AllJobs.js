@@ -106,8 +106,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 50px;
-  padding-left: ${(props) => (props.$small ? "0" : "5rem")};
-  padding-right: ${(props) => (props.$small ? "0" : "5.7rem")};
+  padding-left: ${(props) => (props.$small ? "0" : "0")};
+  padding-right: ${(props) => (props.$small ? "0" : "1.5rem")};
   opacity: ${(props) => (props.$visible ? 1 : 0)};
   transform: translateY(${(props) => (props.$visible ? "0" : "12px")});
   transition: opacity 2s ease, transform 2s ease;
