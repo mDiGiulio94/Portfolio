@@ -20,15 +20,28 @@ export const ExperiencePost = async (experience) => {
   }
 };
 
+const selectTranslation = (item, language, defaultLanguage) => {
+  const translations = item?.translations || {};
+  return translations[language] || translations[defaultLanguage] || {};
+};
+
 // GET: tutte le esperienze
-export const GetExperiences = async () => {
+export const GetExperiences = async ({ language, defaultLanguage = "it" } = {}) => {
   try {
-    const resp = await axios.get(API_URL);
+    const resp = await axios.get(API_URL, {
+      headers: {
+        "Accept-Language": language,
+      },
+      params: {
+        lang: language,
+      },
+    });
     const data = resp.data;
     if (data == null) return [];
     return Object.entries(data).map(([id, experience]) => ({
       id,
       ...experience,
+      ...selectTranslation(experience, language, defaultLanguage),
       tecnologies: Array.isArray(experience?.tecnologies)
         ? experience.tecnologies
         : Object.values(experience?.tecnologies ?? {}),

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import it from "../utils/it.json";
+import useTranslations from "../hooks/useTranslations";
 import Modal from "../components/Modal";
 
 export default function Presentation() {
+  const translations = useTranslations();
   const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
@@ -13,20 +14,19 @@ export default function Presentation() {
   return (
     <>
       <Container>
-        {it.presentazione.map((item, idx) => (
+        {translations.presentazione.map((item, idx) => (
           <section key={idx} className="presentation-section">
             <p>{item.infoPersonali}</p>
             <p>{item.occupazionePresente}</p>
             <p>{item.spareTime}</p>
           </section>
         ))}
-        <Navigator onClick={toggleModal}>Contatta</Navigator>
+        <Navigator onClick={toggleModal}>{translations.labels.contact}</Navigator>
       </Container>
       {showModal && <Modal onClose={toggleModal} />}
     </>
   );
 }
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;

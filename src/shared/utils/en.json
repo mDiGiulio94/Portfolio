@@ -1,0 +1,53 @@
+{
+  "welcome": [
+    {
+      "benvenuto": "Welcome!",
+      "nome": "I'm Marco Di Giulio",
+      "specializzazione": "Frontend Developer",
+      "descrizione": "I love building engaging and interactive web experiences with modern technologies such as React and Angular.",
+      "progetti": "Projects",
+      "about": "About",
+      "workplace": "Work experience"
+    }
+  ],
+  "presentazione": [
+    {
+      "infoPersonali": "I work at the intersection of design and development, defining clear and scalable patterns.\nI design accessible, responsive components that stay true to the brand.\nI optimise rendering and bundles to maximise speed and perceived quality.\nI collaborate with designers and stakeholders to align goals and outcomes.\nGoal: fast, consistent interfaces that are genuinely easy to use.",
+      "occupazionePresente": "I currently work as a Frontend developer at JDK.srl, a consultancy based in Rome (IT), building and maintaining modern, responsive user interfaces that respect Figma designs, accessibility standards and best practices to deliver a high-quality, performant product.",
+      "spareTime": "In my free time I love exploring—whether that's new technologies, landscapes, cultures or flavours. Anything new is worth exploring and inspires the future, especially when I share it with my partner. I enjoy listening to music and working out to keep both mind and body healthy."
+    }
+  ],
+  "admin-panel": [
+    {
+      "titolo": "Admin panel",
+      "esperienze": "Experiences management",
+      "progetti": "Projects management"
+    }
+  ],
+  "itemForm": [
+    {
+      "title": "Contact",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email*",
+      "indirizzo": "Address",
+      "emailAddress": "AriMariq85@gmail.com",
+      "message": "Message",
+      "phone": "Phone"
+    }
+  ],
+  "labels": {
+    "contact": "Contact",
+    "projectsArchive": "Projects archive",
+    "allProjectsTitle": "All projects",
+    "home": "Home",
+    "send": "Send"
+  },
+  "table": {
+    "year": "Year",
+    "project": "Project",
+    "company": "Company",
+    "link": "Link",
+    "technologies": "Technologies"
+  }
+}

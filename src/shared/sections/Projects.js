@@ -4,16 +4,20 @@ import Card from "../components/Card";
 import { useNavigate } from "react-router-dom";
 import { GetProgetti } from "../../API/ProjectApi";
 import useMediaQuery from "../hooks/hooks";
+import { useLanguage } from "../context/LanguageContext";
+import useTranslations from "../hooks/useTranslations";
 
 export default function Projects() {
   const navigate = useNavigate();
+  const { language, defaultLanguage } = useLanguage();
+  const translations = useTranslations();
 
   const [hoverCard, setHoverCard] = useState(null);
   const [progetti, setProgetti] = useState([]);
   const isHoverSupported = useMediaQuery("(hover: hover)");
 
   const fetcProjects = async () => {
-    const res = await GetProgetti();
+    const res = await GetProgetti({ language, defaultLanguage });
     setProgetti(res);
   };
 
@@ -21,7 +25,8 @@ export default function Projects() {
 
   useEffect(() => {
     fetcProjects();
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [language, defaultLanguage]);
 
   return (
     <Container>
@@ -47,7 +52,7 @@ export default function Projects() {
       ))}
       {progetti.length > 0 && (
         <Navigator onClick={() => navigate("/projects")}>
-          Archivio progetti
+          {translations.labels.projectsArchive}
         </Navigator>
       )}
     </Container>

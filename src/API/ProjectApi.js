@@ -4,6 +4,7 @@ import { storage } from "../firebase/firebase.config";
 
 const BASE_URL = "https://portfolio-38468-default-rtdb.firebaseio.com/";
 const API_URL = `${BASE_URL}/projects.json`;
+const DEFAULT_LANGUAGE = "it";
 
 // Post dei progetti
 
@@ -36,14 +37,27 @@ export const ProjectPost = async (project) => {
 
 
 // GET: tutti i progetti
-export const GetProgetti = async () => {
+const selectTranslation = (item, language, defaultLanguage) => {
+  const translations = item?.translations || {};
+  return translations[language] || translations[defaultLanguage] || {};
+};
+
+export const GetProgetti = async ({ language, defaultLanguage = DEFAULT_LANGUAGE } = {}) => {
   try {
-    const resp = await axios.get(API_URL);
+    const resp = await axios.get(API_URL, {
+      headers: {
+        "Accept-Language": language,
+      },
+      params: {
+        lang: language,
+      },
+    });
     const data = resp.data;
     if (data == null) return [];
     return Object.entries(data).map(([id, projects]) => ({
       id,
       ...projects,
+      ...selectTranslation(projects, language, defaultLanguage),
       tecnologies: Array.isArray(projects?.tecnologies)
         ? projects.tecnologies
         : Object.values(projects?.tecnologies ?? {}),

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 //import Json
-import text from "../utils/it.json";
+import useTranslations from "../hooks/useTranslations";
 //import Api
 import sendMail from "../../API/SendEmail";
 
 export default function ContattiForm({ onClose }) {
+  const translations = useTranslations();
   //Campi del form
   const [formData, setFormData] = useState({
     nome: "",
@@ -57,7 +58,7 @@ export default function ContattiForm({ onClose }) {
   return (
     <>
       <FormContatti>
-        {text.itemForm.map((item, index) => (
+        {translations.itemForm.map((item, index) => (
           <form key={index} className="formContact" onSubmit={onSubmit}>
             <section className="title">
               <span>{item.title}</span>
@@ -114,7 +115,7 @@ export default function ContattiForm({ onClose }) {
             </div>
 
             <div className="btn-container">
-              <button type="submit">INVIA</button>
+              <button type="submit">{translations.labels.send}</button>
             </div>
           </form>
         ))}

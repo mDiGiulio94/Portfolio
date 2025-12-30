@@ -3,23 +3,26 @@ import styled from "styled-components";
 import Card from "../components/Card";
 import { GetExperiences } from "../../API/Experience";
 import useMediaQuery from "../hooks/hooks";
+import { useLanguage } from "../context/LanguageContext";
 
 
 export default function Workplaces() {
   const [hoverCard, setHoverCard] = useState(null);
 
   const [experiences, setExperiences] = useState([]);
+  const { language, defaultLanguage } = useLanguage();
     const isHoverSupported = useMediaQuery("(hover: hover)");
 
 
   const fetchExperienes = async () => {
-    const res = await GetExperiences();
+    const res = await GetExperiences({ language, defaultLanguage });
     setExperiences(res);
   };
 
   useEffect(() => {
     fetchExperienes();
-  }, []);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [language, defaultLanguage]);
   
 
   return (

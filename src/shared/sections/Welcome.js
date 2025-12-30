@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import it from "../utils/it.json";
+import useTranslations from "../hooks/useTranslations";
+import LanguageSwitcher from "../components/LanguageSwitcher";
 import useMediaQuery from "../hooks/hooks";
 
 import linkedin from "../images/icons/linkedin.svg";
 import github from "../images/icons/github.svg";
 
 export default function Welcome({ onNavigate = () => {}, activeSection }) {
+  const translations = useTranslations();
   const isSmall = useMediaQuery("(max-width: 1350px)");
 
   const Images = [
@@ -20,7 +22,8 @@ export default function Welcome({ onNavigate = () => {}, activeSection }) {
 
   return (
     <Container>
-      {it.welcome.map((item, idx) => {
+      <LanguageSwitcher />
+      {translations.welcome.map((item, idx) => {
         const navigationItems = [
           { id: "about", label: item.about },
           { id: "work", label: item.workplace },

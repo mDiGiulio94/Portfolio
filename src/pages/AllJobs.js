@@ -4,12 +4,16 @@ import Table from "../shared/components/Table";
 import { GetProgetti } from "../API/ProjectApi";
 import useMediaQuery from "../shared/hooks/hooks";
 import { useNavigate } from "react-router-dom";
+import useTranslations from "../shared/hooks/useTranslations";
+import { useLanguage } from "../shared/context/LanguageContext";
 
 export default function AllJobs() {
   const isNormal = useMediaQuery("(max-width: 1200px)");
   const isSmall = useMediaQuery("(max-width: 992px)");
   const isVerySmall = useMediaQuery("(max-width: 768px)");
   const navigate = useNavigate();
+  const translations = useTranslations();
+  const { language, defaultLanguage } = useLanguage();
 
   const [visible, setVisible] = useState(false);
   const [progetti, setProgetti] = useState([]);
@@ -21,43 +25,44 @@ export default function AllJobs() {
   };
 
   const fetchProjects = async () => {
-    const res = await GetProgetti();
+    const res = await GetProgetti({ language, defaultLanguage });
     setProgetti(res.sort((a, b) => b.date - a.date));
   };
 
   useEffect(() => {
     handleVisible();
     fetchProjects();
-  }, []);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [language, defaultLanguage]);
 
   // tutte le colonne di base
   const baseColumns = [
     {
-      label: <h5>Anno</h5>,
+      label: <h5>{translations.table.year}</h5>,
       width: "10%",
       accessor: (progetti) => (
         <p className="specialP">{progetti.date ?? "-"}</p>
       ),
     },
     {
-      label: <h5>Progetto</h5>,
+      label: <h5>{translations.table.project}</h5>,
       width: "15%",
       accessor: (progetti) => <p>{progetti.name ?? "-"}</p>,
     },
     {
-      label: <h5>Azienda</h5>,
+      label: <h5>{translations.table.company}</h5>,
       width: "15%",
       accessor: (progetti) => (
         <p className="specialP">{progetti.workplace ?? "-"}</p>
       ),
     },
     {
-      label: <h5>Link</h5>,
+      label: <h5>{translations.table.link}</h5>,
       width: "15%",
       accessor: (progetti) => <p>{progetti.link ?? "-"}</p>,
     },
     {
-      label: <h5>Tecnologie</h5>,
+      label: <h5>{translations.table.technologies}</h5>,
       width: "45%",
       accessor: (progetti) =>
         progetti.tecnologies ? (
@@ -93,9 +98,9 @@ export default function AllJobs() {
       <div className="presentation">
      <HomeLink type="button" onClick={() => navigate("/")}> 
           <ArrowLeftIcon aria-hidden="true" focusable="false" />
-          <span>Home</span>
+          <span>{translations.labels.home}</span>
         </HomeLink>
-        <h1>Tutti i progetti</h1>
+        <h1>{translations.labels.allProjectsTitle}</h1>
       </div>
       <Table columns={columns} items={progetti} />
     </Container>
